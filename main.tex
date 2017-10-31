@@ -1,5 +1,286 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
+\documentclass{mprop}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+
+% alternative font if you prefer
+% comment this out to go back
+\usepackage{times}
+
+% for alternative page numbering use the following package
+% and see documentation for commands
+%\usepackage{fancyheadings}
+
+
+% other potentially useful packages
+%\uspackage{amssymb,amsmath}
+%\usepackage{url}
+%\usepackage{fancyvrb}
+%\usepackage[final]{pdfpages}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{listings}
+\usepackage[newfloat]{minted}
+\usemintedstyle{emacs}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
+\usepackage{tabu}
+
+% Use “\cite{NEEDED}” to get Wikipedia-style “citation needed” in document
+\usepackage{ifthen}
+\let\oldcite=\cite
+\renewcommand\cite[1]{\ifthenelse{\equal{#1}{NEEDED}}{\ensuremath{^\texttt{[citation~needed]}}}{\oldcite{#1}}}
+
+\renewcommand{\arraystretch}{1.5}
+
 \begin{document}
-(Type your content here.)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Research Proposal: Smart Sensitivity Review}
+\author{Kelvin Fowler}
+\date{\today}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}\label{intro}
+The National Archives must release documents to the public after a certain amount of time. They must also respond to freedom of information requests. In the digital age, more and more documents are digital borne. There is an increasing burden on archive facilities to decide ``what to keep'' \cite{NEEDED} as the collections of documents grow in size each day.  An example of sensitivity is the name of intelligence service informants or subjective negative sentiment towards foreign dignitaries, potentially harming international relations. There are clear guidelines in place which explain the reasons a document may be considered sensitive \cite{NEEDED}. 
+
+Part of this process involves comparing the contents of potentially sensitive documents to public domain documents. If the content of the government documents is already in the public domain then these documents can be released without cause for concern. Currently the system in place to do this type of review is manual and insecure. It involves archivists using on-line search engines to retrieve public domain documents (such as news articles) in order to do the comparison. This means that potentially sensitive queries are being issued to public facing search engines, from a source in government. 
+
+The digitization of sensitivity review presents an opportunity for novel technology based approaches to ease the burden. Information Retrieval (IR) is the process of providing information relative to a given information need. IR naturally lends itself to this task. The information need is \textit{public domain documents relating to a potentially sensitive document}. Indeed, IR has been applied in various ways to this task of sensitivity review. Sensitivity review is a classification task (that is, we want to specifically classify documents as \textit{sensitive} or \textit{not sensitive} and public domain knowledge identification is but one aspect of this process. Specifically, the identification of public domain knowledge aims to provide assistance to manual review, rather than outright replacing it. Other approaches to sensitivity review are discussed in Section \ref{background_survey}. \todo{motivate further with references from prev project}
+
+As a Level 4 project at the University of Glasgow, this task of identifying public domain knowledge was tackled in part. A Prototype UI and a REST API were produced. The system analyses documents to automatically generate queries to be run in a search engine in order to retrieve public domain documents. This project used natural language processing to tag named entities within the documents and generate queries from this data. This system of query generation was evaluated to find the best method. The evaluation led to conclusions and suggestions for directions of future work. These serve as an indication for the areas that we plan to investigate in this project.
+
+\subsection{Terminology}
+From henceforth a document from which queries are generated will be called a Source Document. A document which is to be retrieved by the search engine will be called a Target Document.
+Generally, Source Documents will be potentially sensitive government documents which are to be reviewed. Target Documents will be public domain documents such as news or Wikipedia articles.
+Analagously, the set of all Source Documents will be referred to as the Source Collection and a set of Target Documents will be referred to as a Target Collection (There are several distinct target collections).
+
+\subsection{Structure}
+This research proposal will take the following structure. In Chapter \ref{problem_statement} we will more formally define the problem this research seeks to address, and how this research will contribute to the field of information retrieval. In Chapter \ref{background_survey} related literature is examined in order to  the potential projects relevance. Chapter \ref{proposed_approach} outlines the proposed approach the research will take, as well as detailing some preliminary investigations into the feasibility of these goals. This includes motivations for choices of technologies. Finally, Section \ref{work_plan} highlights the deliverables of the project and potential dates for their completion.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Statement of Problem}\label{problem_statement}
+\todo{we more want to deal with temporal information}
+With some motivation in mind for the problem this research addresses, we must now consider how one could begin to implement a solution. As will be discussed in more detail in Section \ref{background_survey} the previous project began by addressing the Named Entities latent in Source and Target documents. Named Entities are words or phrases referring specifically to people, places or things. These named entities were identified in both source and target documents so that they could be matched during retrieval. Unfortunately, the approaches did not extend far beyond this. Specifically plans for future work mentioned date analysis and application of machine learning techniques. Both of these will be discussed in detail throughout Sections \ref{background_survey} and \ref{proposed_approach}.
+
+As such the problem statement can be refined with a good degree of specificity in terms of the application of the above concepts. This is formalised in the following research questions and discussed in more detail below.
+\subsection{Research Questions}
+\begin{enumerate}[label=\textbf{RQ.\arabic*}]
+\item What is the most appropriate way to integrate and apply recognition of temporal entities into the query generation process and retrieval model, so as to improve the effectiveness of this search system?
+\item How can we use the machine learning to improve the effectiveness of our information retrieval system?
+\item Are there any other methods which measurably improve search effectiveness?
+\end{enumerate}
+
+\subsection{Clarifications}
+\textbf{RQ1} is the most well formed research question proposed in this work. It comes after much research into the application of temporal recognition to IR tasks. You can read more about this in \S \ref{background_survey}. Several approached are discussed and explained, however we must, through careful comparison and evaluation, decide which methods most directly apply to this sensitivity review problem.
+
+\textbf{RQ2} ..
+
+\textbf{RQ3} Through analysis and evaluation of the first two research questions we hope to acquire some insights into what makes a query good or bad in this task, and what features seem to lead to success. If the opportunity presents itself we can improve upon this
+
+The problem this research seeks to address can be summarized in one question: "Can we apply a combination of state of the art IR techniques to improve the performance of an automatic sensitivity review system." There are a few key areas encompassed within "state of the art IR techniques" that will be specifically relevant. This project will seek to find these and prove their effectiveness. Specifically we will aim to produce evaluation results proving these claims of improved performance through the application of these techniques. The evaluation and discussion sections of the aforementioned previous project provide some starting ideas for what can be done to tackle this problem. These ideas are looked at extensively in \S \ref{background_survey}, but include ideas such as key phrase extraction, temporal tagging and learning to rank methods.
+
+\subsection{Research Questions}
+This research aims to investigate and answer the following research questions:
+\begin{enumerate}[label=\textbf{RQ.\arabic*}]
+\item Can this task be improved through identifying source document focus time?
+\item Can we directly compare source and target documents (including a temporal aspect) to retrieve target documents?
+\item Does including temporal data in query formulation improve search results?
+\item Does query expansion through knowledge base linking improve search results?
+\item Can Learning to Rank (L2R) techniques be used effectively in this problem domain?
+\item How else can we formulate queries from long documents?
+\end{enumerate}
+
+\subsection{Not Included in this Project}
+This project will not look at developing a better UI for sensitivity review in the national archives. Sensitivity review is in part a HCI problem combined with an IR problem. We only seek to deal with the IR section.
+
+In the evaluation process of the previous project it was noted that temporal data could be leveraged to improve results. It was also in the original specification to include some machine learning (or learning to rank) features in the final product. This ended up being out of the scope of the project. As such, the work done last year can be seen as a skeleton or starting point to be used to experiment with new features this year. There is no intention to focus on a UI this year. While that was an interesting challenge to think about, efforts are better expended improving the performance of the underlying retrieval task. Once this is optimal, a UI can be devised.
+
+\subsection{Contributions}
+This research will contribute a novel application of state of the art information retrieval techniques to a real world problem. It will also contribute to two areas of information retrieval which seem to be lacking in research - query generation from documents and making use of temporal information present in source and target documents.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Background Survey} \label{background_survey}
+\subsection{Previous Project} \label{background_survey.previous_project}
+This project is hinged on the existence of the work completed last year as part of a Level 4 Project \cite{DissertationKelvinFowler}. This was very much an investigatory project into the domain of using information retrieval to assist sensitivity review. Much focus was given to the interface through which the IR results could be displayed. This proposed project will not at all focus on the interface, but rather on the underlying IR technology that makes this possible.
+The previous project began to address this problem. The key findings surrounded the effectiveness of Query Generation, that is, taking a Source Document and parsing from it a query which could be performed in the IR Search Engine, Terrier. More than just query generation it must be noted that for matching to succeed we must fundamentally alter our target collection in the process of indexing it. The target collection is indexed so that IR works. But we want to match named entities to named entities using a tagging system. So the actual words need to match up, i.e tag both. (This is actually a somewhat ridiculous thing to do, in a real IR system of this type we would ideally avoid using an altered target collection. The idea that we could possibly index and alter with named entity tags ALL public domain knowledge is preposterous.
+
+\subsubsection{Methods}
+\paragraph{Indexing}
+
+\paragraph{Query Formulation}
+The relevant methods employed in the previous projects were query generation through named entity extraction. Some methods were employed in an attempt to find the most relevant named entities (specifically tf-idf) but this was found to not be particularly helpful. 4 query generation options were attempted: 1) \textit{All Terms Query} - identification of named entities, but all other terms were left in an attempt to add context. 2) \textit{Named Entities Query} - all terms were removed except named entities. 3) \textit{Tf-Idf Named Entities Query}, the named entities were given a Tf-Idf ranking and the top ten were used a query. 4) \textit{Subject Query} - The subject line from a source document was used a query after having its named entities identified.
+
+\subsubsection{Evaluation and Findings}
+It was found that the performance of the \textit{All Terms Query} was the objectively the best, but the query took far to long to perform. The shorter named entities query was therefore chosen as the most effective considering all factors. It is noteworthy that the extra terms contained in the all terms query made it perform better (context seems to help a query). A question for this research is how to most effectively contextualize the named entities extracted from a document. The previous project identified that temporal information could prove helpful as well as implementation of some kind of machine learning system.
+
+\subsection{Sensitivity Review} \label{background_survey.sensitivity_review}
+Sensitivity review has been tackled in part. Most of the work in this topic has been in the realm of automatically classifying sensitivities in documents or sensitive documents. McDonald et al \cite{mcdonald2014towards} use features such as mentions of specific countries and people as indication of sensitivity in a given document. More recently, McDonald et al \cite{mcdonald2017enhancing} apply machine learnings techniques (specifically semantic relationship recognition through word embeddings) to further assist the sensitivity classification process. This work does not seek to directly classify documents as sensitive, but rather provide a system through which manual sensitivity review can take place. The comparison to public domain documents is a difficult manual task, and it has been noted that archivists are reluctant to trust technology entirely \cite{gollins2014using}.
+
+\subsection{Technology Assisted Review} \label{background_survey.tech_assisted_review}
+More generally, sensitivity review falls into the category of Technology Assisted Review. Other applications of technology assisted review are E-Discovery \cite{NEEDED} \todo{Ediscovery and other stuff}.
+
+\subsection{Temporal Information Retrieval} \label{background_survey.temporal_ir}
+Some work has been done in the field of incorporating temporal data into IR systems. Most relevant to the research questions at hand here are \cite{TemporalBerberich2010,TemporalStrotgen2012}. Specifically in \cite{TemporalStrotgen2012} Strötgen et al describe a method of identifying top relevant temporal expressions in documents. That is, one can identify which temporal expressions are of most import in a document. One can also check which temporal expressions are of most import in relation to a given query (or corpus). This has clear applications to this research in two ways. The first being the ability to rank temporal expressions for the purpose of query generation. The second being query based features which can be used to retrieve relevant documents (those with more relevant temporal expressions are potentially more relevant). Perhaps more relevant is the work in \cite{TemporalBerberich2010} which deals specifically with temporal expressions in queries. It proposes a language model which allows one to perform queries with both a temporal and textual component, and further proposes a method to combine these seemingly disparate retrieval measures, one of the open questions posed in \cite{alonso2011temporal}. Somewhat related to \cite{TemporalBerberich2010} the Language Model pioneers Li and Croft display in \cite{li2003time} a "time based language model" which promotes in search results documents from a given time period. Jatowt et Al propose a method in \cite{jatowt2013estimating} to estimate the time that a document focusses on. If we know this about a source document then we can apply the methods from \cite{li2003time} to give documents from that time period more weight.
+This research would seek a novel approach combining all of these methods to utilize the temporal information latent in both source and target documents (not to mention knowledge of document creation times).
+
+\subsection{Knowledge Base Linking and Query Expansion} \label{background_survey.knowledge_base}
+Knowledge Base \cite{KnowledgeBaseDalton2014}
+Resource Selection \cite{ResourceSelectionSi2002}
+
+\subsection{Machine Learning}
+\todo{find some references for how we can use machine learning to support the identification and use of temporal information}
+This is very vague...
+Learning Importance \cite{LearningImportanceBendersky2010}
+
+\subsection{Others} \label{background_survey.others}
+The end goal is a system which can identify related public domain documents for a source document from the set of all public domain documents. This means retrieval will have to take place on many, disparate target document collections (or potentially even a web search). In \cite{ResourceSelectionSi2002} a method is proposed to effectively select the best resource collection for retrieval based on a query.
+
+\subsection{Source Reference Table}
+This section gives a summarised reference view of the points made above, summarising relevant work, noting it's omissions and highlighting it's relevance to this work. The references will be listed in the order they appear above.
+
+\begin{tabu} to 1.1\textwidth { | X[l] | X[l] | X[l] | X[l] | }
+\hline
+Work Name and     Reference& Summary& Relevance to This     Work& Shortcomings \\ 
+\hline
+Kelvin Fowler Identifying Public Domain Knowledge \cite{DissertationKelvinFowler} & Investigation into using IR to retrieve public domain documents based on a source document. Queries were formed from the content of the source document and evaluated based on MAP and other common scores. A UI was created to help investigate how this task could be improved for the manual archivists working on sensitivity review.  & Direct predecessor to this proposed work. Provides a codebase upon which this work can be built. Identified areas to expand upon. & Only covered named entity tagging  and disregarded other information latent in source and target documents. Did not cover temporal information or attempt to apply information retrieval to the task.\\ \hline
+McDonald et al Towards a Classifier for Digital Sensitivity Review\cite{mcdonald2014towards} & & & \\ \hline
+McDonald et al Word Embeddings \cite{mcdonald2017enhancing} & & & \\ \hline
+Berberich Query Splitting\cite{TemporalBerberich2010} & & & \\ \hline
+Strotgen Identification of Top Relevant Temporal Terms\cite{TemporalStrotgen2012} & & & \\ \hline
+Kuzey \cite{TemporalKuzeyEtAl2016} & & & \\ \hline
+Croft and Li Time Based Language \cite{li2003time} & & & \\ \hline 
+Jatowt Estimating Document Focus Time\cite{jatowt2013estimating} & & & \\ \hline
+
+\hline
+\end{tabu}
+
+present an overview of relevant previous work including articles, books, and existing software products. Critically evaluate the strengths and weaknesses of the previous work.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Proposed Approach}\label{proposed_approach}
+A basis exists already for this project in the form of the previous years software. We once again plan to use the Terrier \cite{macdonald2012puppy} search engine for the IR workload of this project. Terrier was developed and maintained at the University of Glasgow, so the local knowledge is invaluable. The developer also has extensive background with Terrier and so it makes sense to continue to use this search engine. (Other notable options considered were ... ). We must however build a system on top of Terrier to perform the IR task at hand. In the subsequent sections we will discuss the various facets of this system and a proposed approach to implement each as well as some investigation of feasibility and some preliminary testing. To conclude we discuss our prosed methods of evaluation.
+
+\subsection{Temporal Tagging and Matching}
+There are several temporal taggers in existence which could be integrated into the system. Since the project currently uses StanfordNLP \cite{StanfordNLPManning-EtAl2014} we can easily integrate SUTime\cite{chang2012sutime}, the temporal tagger included in StanfordNLP into the project. In a similar way to how named entity tagging works already, we can tag temporal entities also using an underscore. But how do we get them to match...? (Need to index the target collection also?)
+There are several other choices of temporal taggers. Notably we have Heideltime\cite{TemporalKuzeyEtAl2016}. However these are compared in \cite{chang2012sutime} which shows SUTime to be the best performer.
+It is important however to check that this is true for our own needs also. As such, some rudimentary tests were performed on to compare the effectiveness on date resolution of Heideltime and SUTime.
+
+\subsubsection{Temporal Tagging Comparison}
+In order to compare SUTime and Heideltime, 10 source documents were selected which contain relative references to time (e.g. "yesterday", "last month"). An example of such a document can be seen in Appendix 1 \todo{there is no appendix at present}. These two temporal taggers were chosen for comparison after review of some literature indicating they had very close or equivalent performance. Some studies find SUTime preferable, whereas others indicate that Heideltime performs better. Both have their flaws and strengths in different scenarios.
+
+In the comparison, the TimeX3 output of both taggers was reviewed manually. We wished to compare the taggers on their performance of specifically identifying discrete time references in text. To clarify, sometimes terms such as \textit{``currently''} resolved to a \textbf{present ref}. This is not particularly insightful or helpful and so examples such as this were completely ignored. Further, both SUTime and Heideltime contain facilities to identify sets or ranges of times. Again these were ignored in favour of explicit references. An example of one of these specific references is: 
+\\ \textbf{<TIMEX3 tid=``t1'' type=``DATE'' value=``2008-05-01''>Thursday</TIMEX3>}.
+This document was created on 2008-05-01, hence the specific resolution of ``Thursday'' to the observed date.
+In the manual review we identified True Positives, False Positives, True Negatives and False Negatives. True Positives were correctly identified specific times. False Positives were when explicit times were identified incorrectly (e.g. ``the same day'' being resolved to the document creation date, rather than the date which was previously mentioned in the same sentence. Heideltime identified this correctly, while SUTime did not). True Negatives were all terms which did not refer to dates that the taggers correctly skipped. False Negatives were when the tagger missed an explicit reference to time (e.g. ``2007/08'' being missed due to the ambiguity of the slash.)
+Both taggers resolve to TimeML's TimeX3\cite{timeml} mark-up language which gives a precise format to time annotation.
+
+\paragraph{Heideltime Configuration}
+Heideltime contains a feature which allows the developer to choose between narrative and news style documents for annotation. It was not clear which of these would be better for our source collection. Since the target collection was Associated Press articles, it seems obvious to use the news annotation style. Both options were tried, however using the narrative style meant that the document origin time was ignored, which meant dates were not resolved as accurately for source documents. Thus the news style was used throughout.
+
+Both taggers required minimal effort to integrate with our existing system. In fact, SUTime was included as part of the dependencies required for our existing system of named entity recognition. You can see the amounts of identification were counted, the True Negative amount being calculated through subtraction of the sum of the other values from the total term count of each document. Subsequently, the Accuracy and the Standard F-Measure (\textbf{$ F_1 $}) were calculated and are reported below in Table. \ref{temporalcomparison}.
+In \ref{temporalcomparison} G represents good, usable tagged dates. B represents Wrong, Unusable or Unhelpful tegged dates. ? represents tagged dates that are potentially helpful, but are not immediately obvious.
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+& \multicolumn{4}{|c|}{SUTime}    & \multicolumn{4}{|c|}{Heideltime} \\ 
+\cline{2-9}
+Document & TP  & FP  & TN   & FN    & TP & FP & TN   & FN    \\ \hline
+1        & 11  & 1   & 374  & 0	    & 12 & 0  & 374  & 0     \\ \hline
+2        & 5   & 0	 & 788  & 0	    & 5  & 0  & 788  & 0     \\ \hline
+3		 & 3   & 0   & 228  & 0		& 3  & 0  & 228  & 0	 \\ \hline
+4        & 1   & 1	 & 70   & 0		& 2  & 0  & 70   & 0	 \\ \hline
+5	     & 2   & 0	 & 64   & 0		& 2	 & 0  & 64   & 0     \\ \hline
+6		 & 14  & 0	 & 285  & 2		& 15 & 0  & 285  & 1     \\ \hline
+7		 & 12  & 0	 & 389  & 0		& 11 & 0  & 390  & 1	 \\ \hline
+8		 & 2   & 0	 & 71   & 0	  	& 2	 & 0  & 71   & 0	 \\ \hline
+9		 & 9   & 0	 & 287  & 0		& 9	 & 0  & 287  & 0	 \\ \hline
+10		 & 7   & 1	 & 272  & 0		& 8	 & 0  & 271  & 0	 \\ \hline
+Total    & 66  & 3	 & 2828 & 2	  	& 69 & 0  &	2828 & 2     \\ \hline
+F1-Score & \multicolumn{4}{|c|}{0.9635} & \multicolumn{4}{|c|}{0.9928} \\ \hline
+Accuracy & \multicolumn{4}{|c|}{0.9982} & \multicolumn{4}{|c|}{0.9997} \\ \hline
+\end{tabular}
+\caption{Heideltime vs. SUTime on Sample Source and Target Documents}
+\label{temporalcomparison}
+\end{table}
+Both display high measures of performance, however Heideltime appears to better for our purposes. Through the course of the manual review of the data this can be confirmed. Heideltime seemed more close to way a human would identify dates. The date ranges that Heideltime identifies could also be helpful in the future of this project.
+
+\subsubsection{Using Temporal Tagging}
+Although we plan to use Heideltime for temporal tagging of source and target documents, we must now understand how we can incorporate this into the retrieval model.
+As discussed in \ref{background_survey} there are several existing approaches using temporal matching that we could implement and extend. \cite{} propose a method for estimating document focus time. Combined with the work in \cite{li2003time} we could more heavily weight documents which were created on (or near) this focus time. \todo{implement a prototype of this... is it feasible?}. Another approach is to directly compare the temporal entities in a source document with those in target documents, as is discussed in \cite{makkonen2004simple}. We could attempt to improve upon their temporal similarity vector approach, which they concede is not excellent. \todo{how do berberich compare times}.
+
+The approach should therefore be to implement these various features and learn a model in Terrier which applies this (in various ways) to ranking, using learning to rank. These combinations of ranking models can then be compared in order to decide which use of temporal information is the best.
+
+\subsection{Better and More General Query Generation}
+We can see from \cite{GeneratingQueriesLee12} that various methods can be employed to turn a piece of text into a query. Not only must we identify named entities and temporal data (see above), but we must also consider other n-grams within the text. For example from the text "Hillary Clinton was today campaigning to become the democratic presidential nominee." we can produce a query of the named entities: "hillary\_person clinton\_person democratic\_organization". Clearly, however this lacks much of the context from the original text. A more realistic query to form from this text would be "hillary\_clinton\_person democrat\_organization nominee campaign". This contains far more of the relevant data in the original text. Although we emphasize the role of temporal data in this research proposal, it must not be overlooked that in order to have a functional and performant retrieval system other features like named entities must be taken into account. We can continue to use the named entity indexing step from the previous project as detailed in \cite{DissertationKelvinFowler}.
+
+\subsection{Knowledge Base Linking and Query Expansion}
+Query expansion is another popular IR technique that was not touched upon in the previous work. Knowledge base linking can be used successfully in conjunction with query expansion to include in queries well defined references to specific events or people. An example of how this could help is by resolving a general term like "The President" to a more specific reference to say, "Barack Obama". This is analogous to the resolution of specific times as mentioned above, however comes with the extra step of spatial awareness in the document. We can only resolve this example if the context of the document is the USA. This presents an interesting challenge in itself.
+
+\subsection{Experimental Set Up}
+If the above proposed approaches are implemented, one must then critically evaluate the effectiveness of the new features of the retrieval system. In IR it is standard practice to develop or use and existing test collection. A test collection is a group of queries (called topics) together with a batch of relevance judgements for documents which are retrieved from this query. In the previous project this test collection was developed manually by selecting 20 random source documents (with the condition that it was clear that at least some relevant results were returned, as often reports on stock exchange movements or football reports were retrieved.) For each of these source documents, the 4 queries were produced (as detailed in \S \ref{background_survey.previous_project}). The top 20 results for each of the queries were then manually judged to be relevant or non relevant with respect to the source document. This formed the relevance judgements section of the test collection. With that we were able to calculate commonplace IR evaluation measures such as \textit{Mean Average Precision}, \textit{Mean Reciprocal Rank} and \textit{Mean Precision at 4}. We also considered other domain specific measures such as mean query length and mean query processing time. These are important considerations given our problem statement. These are, potentially, extremely verbose queries which often take a long time to execute and so the trade off between performance and speed is a critical question.
+
+For this project we propose a slightly altered route for generating a test collection. Rather than manually judging the results of queries generated from source documents, one can make use of the pre existing topics and relevance judgements that come with many of the TREC \cite{NEEDED} collections. We are using the NewsWire collection \cite{NEEDED} \todo{are we?}, which contains exactly that. Since source documents and target documents are somewhat analogous, one can therefore substitute one for the other. This type of method is used successfully in Lee's work \cite{GeneratingQueriesLee12}. This would not be a suitable substitution in other sensitivity review scenarios, but we are not considering document sentiment here, but rather the objective ideas mentioned in a document, which are similar across source and target documents. 
+
+More specifically, the following process could be followed. One could choose a number of query topics from the predetermined set in the collection. By analysing the results one could find the resulting retrieved document which most closely matched the TREC description query for the original topic. Then, with some degree of accuracy, the chosen document can be used a source document and we have a predefined set of relevance judgements for target documents. This is not void of issues and it is likely a manual test collection will have to be produces for thoroughness and accuracy.
+
+\cite{TestCollectionKutlu17}.
+Risks are creating a good test collection with a limited budget.
+state how you propose to solve the software development problem. Show that your proposed approach is feasible, but identify any risks.
+
+\subsubsection{Using Exisiting Relevance Judgements}
+In order to ensure using exisiting topics and relevance judgements is a reasonable thing to do for this project this approach was prototyped.
+Last years results were compared with results using the new test collection to ensure we retrieved comparable results. A detailed explanation can be seen below.
+\todo{do this}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Work Plan} \label{work_plan}
+With the above proposed approach in mind we can set some definitive milestones for this research project.
+
+\subsection{Temporal Implementation}
+We should begin by implementing the ideas discussed in \cite{jatowt2013estimating,TemporalKuzeyEtAl2016,li2003time,makkonen2004simple}. This will involve some tweaking to get the proposed approached discussed working in our environment, using Terrier. It must be considered that we are not necessarily only doing retrieval based on temporal measures at once. A more realistic approach is to take the best performing system form last year and consider it as a baseline. This means we will not miss out on key retrieval features (like named entity comparison). After all, we cannot expect good retrieval performance based on temporal information alone.
+
+Once these reference implementations are in place, we must design a system flexible enough to accomodate the different approaches to temporal retrieval we discussed above, namely:
+\begin{itemize}
+\item Combine estimating document focus time and weighting retrieval to favour documents which were created on or near this focus time.
+\item Direct comparison of documents through a temporal comparison function.
+\item Splitting query in to textual and temporal sections (can also use the methods of \cite{TemporalStrotgen2012} to decide which of these temporal terms are most important, and rate them in terms of a query)
+\end{itemize}
+
+\subsection{Formulate Test Collection and Evaluation Process}
+After completion of the above implementations a formal evaluation process must begin. A test collection must be found or generated. Preliminary attempts at using existing topics and qrels were successful. Experiment design must be such that each proposed method is tested individually. 
+
+\subsection{Knowledge Base Linking and Improved Query Formulation}
+Following the evaluation of temporal information, it seems worthwhile to begin investigating other routes to improve the system performance. This includes knowledge base linking to get detailed information on specific entities or events.
+
+\subsection{Machine Learning}
+This is so horribly vague...
+
+\subsection{Time Frames}
+\begin{table}[H]\label{table:time-allocation}
+\begin{center}
+\begin{tabular}{r|l}
+    \emph{Section} & \emph{Intended completion time}\\
+    Implement Temporal Systems & Late December\\
+    Evaluate Temporal Systems & Mid January\\
+    Investigate Other Techniques & February\\
+    Evaluate Other Techniques & Early March\\
+    Report Findings & End March\\
+\end{tabular}\par
+    \caption{Proposed Time Line for Completion of Work}
+\end{center}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% it is fine to change the bibliography style if you want
+\bibliographystyle{plain}
+\bibliography{mprop}
 \end{document}
