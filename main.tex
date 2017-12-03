@@ -92,40 +92,102 @@ subject 	0.184  	9.75  	0.1578
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}\label{intro}
 % REWRITE INTRODUCTION TO GIVE MORE CONTEXT AND BE MORE CLEAR.
-The National Archives must release documents to the public after a certain amount of time. They must also respond to freedom of information requests. These are clauses of The Freedom of Information Act (2000)~\cite{foi}. Documents may be withheld or redacted if they are considered to be sensitive. There are clear guidelines in place which explain the reasons a document may be considered sensitive \cite{foiexemptions}. An example of sensitivity is the name of intelligence service informants or subjective negative sentiment towards foreign dignitaries, potentially harming international relations. In the digital age, more and more documents are digital borne, meaning that the process of reviewing all of these documents for sensitivities is becoming too cumbersome to keep up with the rate of document creation~\cite{allan2014record}. There is an increasing burden on archive facilities to decide ``what to keep''~\cite{moss2012have} as the collections of documents grow in size each day.
+The National Archives are subject to the Freedom of Information Act (2000)~\cite{foi}. 
+This means that they must respond to freedom of information requests and release documents after a certain amount of time.
+There are many reasons why a document may be withheld (which can be seen here), especially if the document is deemed to contain sensitivities.
+Sensitvities are defined as information within the document which would be detrimental if release. 
+For example, a docment may contain the name of confidential informants whose lives would be in danger if the document were release to the public.
+For this reason there is a rigourous review process in place at the National Archives. Archivists must review documents and decide if they contain sensitivities.
+One aspect of this review process is the comparison of document contents to information in the public domain, such as news articles.
+If there is potentially sensitive information within a document, but the information is already known to the public, then the document can be released without case for concern.
+This is not a trivial task and it currently requires the archvists to use public search engines to query the public domain.
+Not only is this slow, it is insecure and releases potential secret information to an external service.
+Further, with the recent adoption of digital docments, more documents must be kept than ever before as every email and digital document is automatically archived.
+The sensitivity review process is struggling to keep up with the rate of document generation~\cite{allan2014record} and there is an increasing burden on archive facilities to decide ``what to keep''~\cite{moss2012have} as the collections of documents grow in size each day.
+The National Archives must release documents to the public after a certain amount of time. They must also respond to freedom of information requests. These are clauses of The Freedom of Information Act (2000)~\cite{foi}. Documents may be withheld or redacted if they are considered to be sensitive. There are clear guidelines in place which explain the reasons a document may be considered sensitive \cite{foiexemptions}. An example of sensitivity is the name of intelligence service informants or subjective negative sentiment towards foreign dignitaries, potentially harming international relations. In the digital age, more and more documents are digital borne, meaning that the process of reviewing all of these documents for sensitivities is becoming too cumbersome to keep up with the rate of document creation~\cite{allan2014record}. 
 
-The digitization of sensitivity review presents an opportunity for novel technology based approaches to ease the burden. Information Retrieval (IR) is the process of providing information relevant to a given information need. \textbf{IR naturally lends itself to this task.} The information need is \textit{public domain documents relating to a potentially sensitive document}. Indeed, IR has been applied in various ways to the task of sensitivity review (see Section~\ref{background_survey.sensitivity_review}. Sensitivity review is a classification task (that is, we want to specifically classify documents as \textit{sensitive} or \textit{not sensitive} and public domain knowledge identification is but one aspect of \textbf{this} process. Specifically, the identification of public domain knowledge aims to assist the manual review process, rather than to replace it. In fact, it has been noted that the manual review staff would be reluctant to allow technology to perform the task~\cite{gollins2014using}.
+This abundance of digital documents present an opportunity to adjust the sensitivity review process and introduce assistive technology to make the process easier.
+Generally, this type of classification task falls into the domain of Information Retrieval (IR), which is the process of providing information relevant to a given information need.
+Some work has been done to apply IR in the automatic classification of documents as sensitive (see Section~\ref{background_survey.sensitivity_review}), however this proposal seeks to address the public domain knowledge task described above.
+The information need is public domain docments relating to the contents of a given document which is to be reviewed.
+If these public domain documents (such as news articles) can be automatically presented to the reviewer along side the document for review, this would significantly decrease the workload and security concerns attached to this part of the process.
+We do not seek to outright replace the role of manual review with technology, and it has been noted in the past that archivists are reluctant to trust technology alone in the sensitivity review process.
+% TODO: Have you covered the risks associated with querying the internet enough.
+%The digitization of sensitivity review presents an opportunity for novel technology based approaches to ease the burden. Information Retrieval (IR) is the process of providing information relevant to a given information need. \textbf{IR naturally lends itself to this task.} The information need is \textit{public domain documents relating to a potentially sensitive document}. Indeed, IR has been applied in various ways to the task of sensitivity review (see Section~\ref{background_survey.sensitivity_review}. Sensitivity review is a classification task (that is, we want to specifically classify documents as \textit{sensitive} or \textit{not sensitive} and public domain knowledge identification is but one aspect of \textbf{this} process. Specifically, the identification of public domain knowledge aims to assist the manual review process, rather than to replace it. In fact, it has been noted that the manual review staff would be reluctant to allow technology to perform the task~\cite{gollins2014using}.
 
-As a Level 4 project at the University of Glasgow, this task of identifying public domain knowledge was tackled in part. A Prototype UI and a REST API were produced. The system analyses documents to automatically generate queries to be run in a search engine in order to retrieve public domain documents. This project used natural language processing to tag named entities within the documents and generate queries from this data. This system of query generation was evaluated to find the best method. The evaluation led to conclusions and suggestions for directions of future work. These serve as an indication for the areas that we plan to investigate in this project.
+This task of identifying public domain knowledge in relation to the contents of potentially sensitive documents has already been tackled in part by a Level 4 Project at the University of Glasgow. 
+The system generated queries automatically from documents which were potentially sensitive and ran them through an IR search engine to return relevant public domain documents.
+The system also provided a prototype user interface for presenting the results to manual reviewers.
+The system proved successful, though during the query generation phase only named entities were extracted.
+These named entities were used to generate different queries to be use to return public domain documents.
+This proposed research seeks to expand upon the system created last year in order to improve it's effectiveness and provide better public domain results for any given potentially sensitive document.
+Some potential avenues for this expansion were identified during the evaluation stage of the L4 Project, such as extraction of temporal information and the use of machine learning.
+We propose to use these techniques, and others, to generate further queries from potentially sensitive documents.
+Further, we wish to investigate improvements to the entire retieval system, in addition to the query generation phase.
+
+%As a Level 4 project at the University of Glasgow, this task of identifying public domain knowledge was tackled in part. A Prototype UI and a REST API were produced. The system analyses documents to automatically generate queries to be run in a search engine in order to retrieve public domain documents. This project used natural language processing to tag named entities within the documents and generate queries from this data. This system of query generation was evaluated to find the best method. The evaluation led to conclusions and suggestions for directions of future work. These serve as an indication for the areas that we plan to investigate in this project.
 
 % The project proposed in the document seeks to extend upon the system built last year. We aim to improve the performance of automatically generated queries significantly, through various techniques which will be discussed below. The me
 
-The project proposed in the document seeks to extend upon the system built last year in order to improve the query generation process. Once again, we will investigate the automatic formulation of queries from the contents of given documents which resemble those that are to be reviewed for sensitivities.
+%The project proposed in the document seeks to extend upon the system built last year in order to improve the query generation process. Once again, we will investigate the automatic formulation of queries from the contents of given documents which resemble those that are to be reviewed for sensitivities.
 
 \subsection{Terminology}
-From henceforth a document from which queries are generated will be called a \textbf{Source Document}. A document which is to be retrieved by the search engine will be called a \textbf{Target Document}.
-Generally, Source Documents will be potentially sensitive government documents which are to be reviewed. Target Documents will be public domain documents such as news or Wikipedia articles.
-Analogously, the set of all Source Documents will be referred to as the \textbf{Source Collection} and a set of Target Documents will be referred to as a \textbf{Target Collection} (There are several distinct target collections).
+From henceforth a potentially sensitive document from which queries are generated will be called a \textbf{Source Document}. 
+A public domain document which is to be retrieved by the search engine will be called a \textbf{Target Document}.
+Although we do not have access to real potentially sensitive document, we can use other documents in place as source documents.
+Target Documents will be public domain documents such as news or Wikipedia articles.
+Analogously, the set of all Source Documents will be referred to as the \textbf{Source Collection} and a set of Target Documents will be referred to as a \textbf{Target Collection}.
+Potentially, the collection of all target documents is enormous, and consists of every publc domain document. We will deal with some specific subsets of these.
 The project which was completed last year will be referred to as the L4 Project.
 
 \subsection{Structure}
-This research proposal will take the following structure. In Chapter \ref{problem_statement} we will more formally define the problem this research seeks to address, and how this research will contribute to the field of IR. In Chapter \ref{background_survey} related literature is reviewed in order to investigate the proposed projects relevance and prompt discussion of potential avenues for this research to take. Chapter \ref{proposed_approach} outlines the proposed approach the research will take, as well as detailing some preliminary investigations into the feasibility of these goals. This includes motivations for choices of technologies. Finally, Section \ref{work_plan} highlights the deliverables of the project and potential dates for their completion.
+This research proposal will take the following structure. 
+In Chapter \ref{problem_statement} we will more formally define the problem this research seeks to address, and how this research will contribute to the field of IR. 
+In Chapter \ref{background_survey} related literature is reviewed in order to investigate the proposed projects relevance and prompt discussion of potential avenues for this research to take. 
+Chapter \ref{proposed_approach} outlines the proposed approach the research will take, as well as detailing some preliminary investigations into the feasibility of these goals. 
+This includes motivations for choices of technologies. Finally, Section \ref{work_plan} highlights the deliverables of the project and potential dates for their completion.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Statement of Problem}\label{problem_statement}
-With some motivation in mind for the problem this research might address, we must now consider how to formalize our aims. As will be discussed in more detail in Section \ref{background_survey} the previous project began by addressing the Named Entities latent in Source and Target documents. Named Entities are words or phrases referring specifically to people, places or things. These named entities were identified in both source and target documents so that they could be directly matched during retrieval. Time dictated that the approaches did not extend far beyond this, however the findings provided useful insights which have been used to formulate some of the ideas in this proposal. In addition to named entities there are several other pieces of information present in the bodies of source documents such as dates, subjects, noun phrases, verb phrases and other n-grams. Generally, there exists reasonable methods for automatic extraction of many of these such as the Stanford NLP Tool-kit. The L4 Project gave some suggestion of these other extractable items, however did not go into great detail on how to make use of them. Further, the specification for the L4 Project originally mentioned making use of some machine learning techniques. This was not done due to time constraints, but machine learning (especially learning to rank) have been show to provide good performance in many retrieval tasks. These methods will be explored in detail throughout Sections \ref{background_survey} and \ref{proposed_approach}. We wish to combine these ideas to create a performant retrieval system which can return target documents which are relevant to the content of a source document, in a way which is assistive to sensitivity review. We wish to make use of relevant IR technologies outside of the previously explored query generation through named entity extraction and to discover what information a source document contains that is the most important for the task of retrieval of public domain knowledge.
-
+With some motivation in mind for the problem this research might address, we must now consider how to formalize our aims. 
+As will be discussed in more detail in Section \ref{background_survey} the L4 project began by investigating the use of named entities present in source and target documents.
+Named Entities are words or phrases referring specifically to people, places or things.
+These named entities were identified in both source and target documents so that they could be directly matched during retrieval. 
+Time dictated that the approaches did not extend far beyond this, however the findings provided useful insights which have been used to formulate some of the ideas in this proposal. 
+In addition to named entities there are several other pieces of information present in the bodies of source documents such as dates, subjects, noun phrases, verb phrases and other n-grams. 
+Generally, there exists reasonable methods for automatic extraction of many of these such as the Stanford NLP Tool-kit~\cite{manning2014stanford}. 
+The L4 Project gave some suggestion of these other extractable items, however did not go into great detail on how to make use of them. 
+Further, the specification for the L4 Project originally mentioned making use of some machine learning techniques. 
+This was not done due to time constraints, but machine learning (especially learning to rank) has been show to provide good performance in many retrieval tasks. 
+These methods will be explored in detail throughout Sections \ref{background_survey} and \ref{proposed_approach}. 
+We wish to combine these ideas to create a performant retrieval system which can return target documents which are relevant to the content of a source document, in a way which is assistive to sensitivity review. 
+%We wish to make use of relevant IR technologies outside of the previously explored query generation through named entity extraction and to discover what information a source document contains that is the most important for the task of retrieval of public domain knowledge.
+Relevant IR technologies can be employed to extend upon the extraction of named entities, allowing us to formulate queriees containing other sources of information.
 The following research questions formalize the above discussion and describe the goals of this proposed project.
 
 \subsection{Research Questions}
 \begin{enumerate}[label=\textbf{RQ.\arabic*}]
 \item \textit{What easily extracted information within the body of source documents (such as Named Entities, Temporal References and Other n-grams) are most important in the formation of a query for retrieval of public domain documents relevant to events and concepts mentioned in a source document? }
 
-\textbf{RQ1} has already been tackled in part. The L4 project showed that named entities extracted from source documents provide a good base query with which to perform retrieval. However it was also identified that by removing much of the information and context from the source document we lost some search accuracy (see Section~\ref{background_survey.previous_project} for more detail). This aspect of sensitivity review (the comparison of public domain information) often deals with references to specific events. These events occur at a given time and so the temporal information present in source documents can be used to identify these time frames. We must also discover what other information is latent within source documents. Context surrounding Named and Temporal Entities could be important. The challenge remains to specifically identify these ``important'' pieces of context.
+\textbf{RQ1} has already been tackled in part. 
+The L4 project showed that named entities extracted from source documents provide a good base query with which to perform retrieval. 
+However it was also identified that by removing much of the other information and context from the source document we lost some search accuracy (see Section~\ref{background_survey.previous_project} for more detail). 
+The task of comparison of public domain information in senstivity review often deals with references to specific events. 
+These events occur at a given time and so the temporal information present in source documents can be used to identify these time frames. 
+We must also discover what other information contained in source documents can be leveraged to asssist this task.
+Context surrounding named and temporal entities could be important. 
+The challenge remains to identify what constitutes context and how it can be leveraged.
 
 \item \textit{Can a comprehensive retrieval model be produced to generate queries from unseen source documents to retrieve public domain documents related to events and notions inside the source document?}
 
-\textbf{RQ2} addresses a potentially more difficult question. In \textbf{RQ1} we discuss the extraction of features from source documents such as temporal entities and named entities. We must form these extracted features in to a query and run it through some IR search engine. We must therefore create a supporting framework which allows for the seamless extraction of these features and the ability to use them as queries. Not only that, there is much more to IR than sound query formulation. Machine learning techniques such as learning to rank and query expansion techniques like pseudo-relevance feedback can be applied to improve performance. We must consider which techniques are most appropriate in the scenario of retrieval of public domain knowledge and effectively apply and integrate them. This entire system must be evaluated in order to answer \textbf{RQ2}.
+\textbf{RQ2} addresses a potentially more difficult question. 
+In \textbf{RQ1} we discuss the extraction of features from source documents such as temporal entities and named entities. 
+We must form these extracted features in to a query and run it through some IR search engine. 
+We must therefore create a supporting framework which allows for the seamless extraction of these features and the ability to use them in queries. 
+Not only that, there is much more to IR than sound query formulation. 
+Machine learning techniques such as learning to rank and query expansion techniques like pseudo-relevance feedback can be applied to improve performance. 
+We must consider which techniques are most appropriate in the scenario of retrieval of public domain knowledge and effectively apply and integrate them. 
+This entire system must be evaluated in order to answer \textbf{RQ2}.
 \end{enumerate}
 
 These research questions allow us freedom to investigate multiple avenues of query generation and retrieval techniques. At the end of Section~\ref{proposed_approach} we give more detailed hypotheses upon which to evaluate our proposed work.
@@ -144,11 +206,15 @@ These research questions allow us freedom to investigate multiple avenues of que
 % \end{enumerate}
 
 \subsection{Scope of this Project}
-We now define the expected scope of this proposed project, that is what we expect to cover, what we may cover time permitting and what we will not seek to address. Clearly, we must investigate, implement and evaluate a system which can answer the above research questions (\textbf{RQ1} \& \textbf{RQ2}). In order to do this, we must create a system which generates queries from documents, runs these queries against a target collection and analyses the quality of the results.
+We now define the expected scope of this proposed project, that is what we expect to cover, what we may cover time permitting and what we will not seek to address. 
+Clearly, we must investigate, implement and evaluate a system which can answer the above research questions (\textbf{RQ1} \& \textbf{RQ2}). 
+In order to do this, we must create a system which generates queries from documents, runs these queries against a target collection and analyses the quality of the results.
 
-Assuming this initial research is done is satisfactory time, other avenues may be explored such as knowledge base linking, query expansion and resource selection. More detail on these concepts can be found in Section~\ref{background_survey}.
+Assuming this initial research is done is satisfactory time, other avenues may be explored such as knowledge base linking, query expansion and resource selection. 
+More detail on these concepts can be found in Section~\ref{background_survey}.
 
-This proposed project will explicitly not focus on developing or improving any kind of user interface. This was a sizeable aspect of the L4 Project, however will not be in the scope of this proposed work.
+This proposed project will explicitly not focus on developing or improving any kind of user interface. 
+This was a sizeable aspect of the L4 Project, however will not be in the scope of this proposed work.
 
 % \subsection{Not Included in this Project}
 % In the evaluation process of the previous project it was noted that temporal data could be leveraged to improve results. It was also in the original specification to include some machine learning (or learning to rank) features in the final product. This ended up being out of the scope of the project. As such, the work done last year can be seen as a skeleton or starting point to be used to experiment with new features this year. There is no intention to focus on a UI this year. While that was an interesting challenge to think about, efforts are better expended improving the performance of the underlying retrieval task. Once this is optimal, a UI can be devised.
@@ -157,17 +223,30 @@ This proposed project will explicitly not focus on developing or improving any k
 % This project will deal with an existing set of off-line target documents. However this is, of course, not all of the public domain information available. Effectively, everything on the web is public domain information and thus, a fully functioning version of this application should be able to search the full web. This is actually part of the problem this research tries to address. Previously archivists use insecure web search to find out what was public domain knowledge.
 
 \subsection{Contributions}
-This research will contribute an improvement to the understanding of the formation of queries from source documents. Specific techniques for query generation from documents will be described and empirically evaluated. This research has applications in many areas of information retrieval outside of sensitivity review (for example, finding related web pages, news stories or other automatic recommendations).
-
+This research will contribute an improvement to the understanding of the formation of queries from source documents. 
+Specific techniques for query generation from documents will be described and empirically evaluated. 
+This research has applications in many areas of information retrieval outside of sensitivity review (for example, finding related web pages, news stories or other automatic recommendations).
+\todo{This is a bit guff}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BACKGROUND SURVEY/ LIT REVIEW
 \section{Background Survey} \label{background_survey}
-This section will present an overview of the various pieces of related literature to this proposed research. We will discuss previous work completed in the field of sensitivity review as well as other information retrieval studies which are applicable and relevant.
+This section will present an overview of the various pieces of related literature to this proposed research. 
+We will discuss previous work completed in the field of sensitivity review as well as other information retrieval studies which are applicable and relevant.
 
 \subsection{Previous Project} \label{background_survey.previous_project}
-This proposed project is hinged on the existence of the work completed last year as part of a Level 4 Project \cite{DissertationKelvinFowler}. The L4 project was very much an investigatory project into the domain of using information retrieval to assist sensitivity review. Although the L4 project focussed heavily on a user interface (work which will not continue in this proposed research) it also began to tackle the task of effective retrieval of target documents given some source document. The source document was used to generate a query which could be performed in the IR search engine Terrier, against the collection of target documents. Retrieval using these generated queries was empirically evaluated in order to understand the performance of different query formulations. The evaluation results of the L4 Project form a baseline of performance that we wish to improve upon in this proposed research. They also provide good indication of which avenues to proceed or ignore.
+This proposed project is hinged on the existence of the work completed last year as part of the L4 Project \cite{DissertationKelvinFowler}. 
+The L4 project was very much an investigatory project into the domain of using information retrieval to assist sensitivity review. 
+Although the L4 project focussed heavily on a user interface (work which will not continue in this proposed research) it also began to tackle the task of effective retrieval of target documents given some source document. 
+The source document was used to generate a query which could be performed in the IR search engine Terrier, against the collection of target documents.
+Retrieval using these generated queries was empirically evaluated in order to understand the performance of different query formulations. 
+The evaluation results of the L4 Project form a baseline of performance that we wish to improve upon in this proposed research.
+They also provide good indication of which avenues to proceed or ignore.
 
-The implementation of the L4 Project can also be reused as a starting point for this proposed research. It features some custom indexing tokenizers which extract named entities from source documents. This can be expanded to extract the other information we are interested in (temporal entities and other chunks). This indexing step allows us to iterate through terms in a document, analyse them and store them in some way. The indexing step can be run on source and target documents alike in order to extract and tag the matching information in each.
+The implementation of the L4 Project can also be reused as a starting point for this proposed research. 
+It features some custom indexing tokenizers which extract named entities from source documents. 
+This can be expanded to extract the other information we are interested in (temporal entities and other chunks). 
+This indexing step allows us to iterate through terms in a document, analyse them and store them in some way. 
+The indexing step can be run on source and target documents alike in order to extract and tag the matching information in each.
 
 After indexing the source documents and identifying the named entities four queries were generated and written directly to the source document files. In the web app these files would have to be loaded in order to present the source document to the user, so there is no additional cost to storing the queries in these files.
 Four queries were generated:
@@ -178,10 +257,20 @@ Four queries were generated:
   \item \textit{Subject Query} - The subject line from a source document was used a query after having its named entities identified. This was an attempt to add context to the queries, as well as being short and easy to compute.
 \end{itemize}
 
-The methods employed in the L4 project are extremely relevant for this proposed research. They provide a baseline and initial code base to improve and extend upon.
+The methods employed in the L4 project are extremely relevant for this proposed research. 
+They provide a baseline and initial code base to improve and extend upon.
 
 \subsubsection{Evaluation and Findings}
-It was found that the performance of the \textit{All Terms Query} was the objectively the best, but the query took far too long to perform. The query processing time is a measure we must take into account in this proposed project as having an excellent performing query is pointless if it cannot be performed in a reasonable time, especially in the context of assistive review. The shorter \textit{Named Entities Query } was therefore chosen as the most effective considering all factors. Results can be seen in Table~\ref{standard_results}. Figure~\ref{mapgraphs} also shows the clear correlation between query length and processing time, as well as illustrating the point that a significantly shorter (and therefore faster) query can perform reasonably well.
+In order to evaluate the system, a test collection was formulated using a sample of source documents. 
+These were wikileaks files which were identified by National Archive's reviewers to be representative of real documents which must be reviewed for sensitivities.
+The target collection was a collection of Associated Press news articles.
+In order to generate an effective test collection, 20 source documents were chosen and the 4 above queries were generated and run from each. 
+The top 20 returned documents for each of these quetries was then judged as relevant or non-relevant. 
+This formed the test collection.
+This was expensive to produce, and so we opt for a different method in this proposed research (see Section~\ref{proposed_approach} for details.)
+These relevance judgements were then used to get results on the effectiveness of the various query formulations.
+It was found that the performance of the \textit{All Terms Query} was the objectively the best, but the query took far too long to perform. 
+The query processing time is a measure we must take into account in this proposed project as having an excellent performing query is pointless if it cannot be performed in a reasonable time, especially in the context of assistive review. The shorter \textit{Named Entities Query } was therefore chosen as the most effective considering all factors. Results can be seen in Table~\ref{standard_results}. Figure~\ref{mapgraphs} also shows the clear correlation between query length and processing time, as well as illustrating the point that a significantly shorter (and therefore faster) query can perform reasonably well.
 
 \begin{center}
 \begin{table}[h]
@@ -234,34 +323,74 @@ Subject               	& 0.1840 			& \textbf{9.75}     & 0.1578                &
 \caption{Analysis of Mean Average Precision (MAP) Scores against Query Processing Time and Query Length. Adapted from Level 4 Project~\protect\cite{DissertationKelvinFowler}} \label{mapgraphs}
 \end{figure}
 
-Other noteworthy findings include the fact that Named Entities of the Person type seem to have the biggest bearing on retrieval performance of the 3 named entity types used. Also, the extra context present in the All Terms Query clearly helped its performance. A key takeaway for this research is the challenge of how best to optimize keeping performance while including enough context around named entities. Some qualitative investigation of the performance of certain queries yielded some additional insights. It was clear that although the system was able to match specific named entities, for example ``George Bush'' and ``Iraq'', public domain documents could be referring to several different instances where these two named entities were present in a document fro any reason. The clear way to differentiate this kind of ambiguity is through a specific temporal range or point which classifies the relevant time. Further, it was noted that the L4 project did not make use of the popular process of learning to rank, which is almost ubiquitous in IR systems presently. These are both aspects which we propose to work on in the current proposed project.
-Although this project provides the basis upon which we will work for this proposed research it is lacking in several areas. The evaluation stage focusses too much on specific implementation details instead of trying to improve the query generation stage. The focus on a UI is also somewhat irrelevant. It does however provide excellent information upon which to form hypotheses for this research.
+Other noteworthy findings include the fact that Named Entities of the Person type seem to have the biggest bearing on retrieval performance of the 3 named entity types used. 
+Also, the extra context present in the All Terms Query clearly helped its performance. 
+A key takeaway for this research is the challenge of how best to optimize keeping performance while including enough context around named entities. Some qualitative investigation of the performance of certain queries yielded some additional insights. 
+It was clear that although the system was able to match specific named entities, for example ``George Bush'' and ``Iraq'', public domain documents could be referring to several different instances where these two named entities were present in a document fro any reason. 
+The clear way to differentiate this kind of ambiguity is through a specific temporal range or point which classifies the relevant time. Further, it was noted that the L4 project did not make use of the popular process of learning to rank, which is almost ubiquitous in IR systems presently. These are both aspects which we propose to work on in the current proposed project.
+Although this project provides the basis upon which we will work for this proposed research it is lacking in several areas. 
+The evaluation stage focusses too much on specific implementation details instead of trying to improve the query generation stage. 
+The focus on a UI is also somewhat irrelevant. It does however provide excellent information upon which to form hypotheses for this research.
 
 \subsection{Sensitivity Review} \label{background_survey.sensitivity_review}
 \todo[color=blue]{review}
-Assistive digital sensitivity review is an open challenge in information retrieval, and is being actively tackled, mainly by a team here at The University of Glasgow. Most of the work in this topic has been in the realm of automatically classifying sensitivities in documents or sensitive documents. McDonald et al~\cite{mcdonald2014towards} use features such as mentions of specific countries and people as indication of sensitivity in a given document. More recently, McDonald et al~\cite{mcdonald2017enhancing} apply machine learnings techniques (specifically semantic relationship recognition through word embeddings) to further assist the sensitivity classification process. These papers do not refer to the challenge of public domain knowledge comparison in sensitivity review, but instead tackle the other challenges it presents. While providing good background into the problem domain, they do not necessarily provide information on the specific task we propose. This proposed research does not seek to directly classify documents as sensitive, but rather provide a system through which manual sensitivity review can take place. The comparison to public domain documents is a difficult manual task, and it has been noted that archivists are reluctant to trust technology entirely~\cite{gollins2014using}, although some intervention is needed if The National Archives are to keep up with the ever growing numbers of documents. This proposed work seeks to provide some of this assistance.
+Assistive digital sensitivity review is an open challenge in information retrieval, and is being actively tackled, mainly by a team here at The University of Glasgow. 
+Most of the work in this topic has been in the realm of automatically classifying sensitivities in documents or sensitive documents. 
+McDonald et al~\cite{mcdonald2014towards} use features such as mentions of specific countries and people as indication of sensitivity in a given document. 
+More recently, McDonald et al~\cite{mcdonald2017enhancing} apply machine learnings techniques (specifically semantic relationship recognition through word embeddings) to further assist the sensitivity classification process. These papers do not refer to the challenge of public domain knowledge comparison in sensitivity review, but instead tackle the other challenges it presents. While providing good background into the problem domain, they do not necessarily provide information on the specific task we propose. This proposed research does not seek to directly classify documents as sensitive, but rather provide a system through which manual sensitivity review can take place. The comparison to public domain documents is a difficult manual task, and it has been noted that archivists are reluctant to trust technology entirely~\cite{gollins2014using}, although some intervention is needed if The National Archives are to keep up with the ever growing numbers of documents. This proposed work seeks to provide some of this assistance.
 
 \subsection{Technology Assisted Review} \label{background_survey.tech_assisted_review}
-More generally, sensitivity review falls into the category of Technology Assisted Review (TAR). TAR is technology which attempts to improve or assist a manual review process, such as sensitivity review.  Other applications of technology assisted review are E-Discovery \cite{oard2013information}, where the retrieval task is retrieving all relevant documents relating to the opposing party in a civil litigation case. This type of technology assisted review has also made headlines in recent years when the FBI used technology to assist their review of the Hillary Clinton E-Mails \cite{cnnclinton}. \todo{MORE here, also a specific notion of why this is relevant at all}
+More generally, sensitivity review falls into the category of Technology Assisted Review (TAR). 
+TAR is technology which attempts to improve or assist a manual review process, such as sensitivity review.  Other applications of technology assisted review are E-Discovery \cite{oard2013information}, where the retrieval task is retrieving all relevant documents relating to the opposing party in a civil litigation case. This type of technology assisted review has also made headlines in recent years when the FBI used technology to assist their review of the Hillary Clinton E-Mails \cite{cnnclinton}. \todo{MORE here, also a specific notion of why this is relevant at all}
 
 \subsection{Temporal Information Retrieval} \label{background_survey.temporal_ir}
-Some work has been done in the field of incorporating temporal data into IR systems. In Section~\ref{proposed_approach} we discuss some ways in which temporal information could be applied to this research. Most relevant here are~\cite{berberich2010language,strotgen2012identification}. Specifically Strotgen et al~\cite{strotgen2012identification} describe a method of identifying top relevant temporal expressions in documents. That is, identification of which temporal expressions are of most import in a document. One can also check which temporal expressions are of most import in relation to a given query (or corpus). This has clear applications to this research in two ways. The first being the ability to rank temporal expressions for the purpose of query generation. The second being query based features which can be used to retrieve relevant documents (those with more relevant temporal expressions are potentially more relevant). This would provide a good extension to direct matching of temporal entities. Perhaps more directly relevant is the work of Berberich et al~\cite{berberich2010language} which deals specifically with temporal expressions in queries. They propose a language model which allows one to perform queries with both a temporal and textual component, and further proposes a method to combine these seemingly disparate retrieval measures, one of the open questions posed in a review of temporal information in IR~\cite{alonso2011temporal}. Somewhat related to~\cite{berberich2010language} the Language Model pioneers Li and Croft display in~\cite{li2003time} a "time based language model" which promotes in search results documents from a given time period. Jatowt et al~\cite{jatowt2013estimating} propose a method to estimate the time that a document focusses on. If we know this about a source document then we can apply the methods from~\cite{li2003time} to give documents from that time period more weight. \todo{Strengths and weaknesses!}
+Some work has been done in the field of incorporating temporal data into IR systems. 
+In Section~\ref{proposed_approach} we discuss some ways in which temporal information could be applied to this research. 
+Most relevant here are~\cite{berberich2010language,strotgen2012identification}. 
+Specifically Strotgen et al~\cite{strotgen2012identification} describe a method of identifying top relevant temporal expressions in documents. 
+That is, identification of which temporal expressions are of most import in a document. 
+One can also check which temporal expressions are of most import in relation to a given query (or corpus). 
+This has clear applications to this research in two ways. The first being the ability to rank temporal expressions for the purpose of query generation. 
+The second being query based features which can be used to retrieve relevant documents (those with more relevant temporal expressions are potentially more relevant). 
+This would provide a good extension to direct matching of temporal entities. 
+Perhaps more directly relevant is the work of Berberich et al~\cite{berberich2010language} which deals specifically with temporal expressions in queries. 
+They propose a language model which allows one to perform queries with both a temporal and textual component, and further proposes a method to combine these seemingly disparate retrieval measures, one of the open questions posed in a review of temporal information in IR~\cite{alonso2011temporal}. 
+Somewhat related to~\cite{berberich2010language} the Language Model pioneers Li and Croft display in~\cite{li2003time} a ``time based language model'' which promotes in search results documents from a given time period. 
+Jatowt et al~\cite{jatowt2013estimating} propose a method to estimate the time that a document focusses on. If we know this about a source document then we can apply the methods from~\cite{li2003time} to give documents from that time period more weight. \todo{Strengths and weaknesses!}
 This research would seek a novel approach combining all of these methods to utilize the temporal information latent in both source and target documents (not to mention knowledge of document creation times).
 
 \subsection{Complex Queries}
-Previously, we merely formed a query out of plain text and ran it through Terrier. Another option is to use a complex query consisting of formatted sub-queries. Indri~\cite{strohman2005indri} is an existing search engine with this type of feature
-The Indri query language provides a format for representing queries with multiple probabilistic features and specific logical combinations. A precursor to Indri was the Inquery search engine, which provided the basis for complex queries in a probabilistic retrieval model~\cite{callan1992inquery}. I do indeed to propose to do this type of thing. It lends itself well to the idea that there are distinct parts of the query we might want to focus on and weight differently. We can also apply these ideas in order to provide different types of matching depending on the part of the query. For example, we may wish to match named entities exactly, but also match them on surname only. We need a query language and system which is flexible enough to allow for this kind of complex instruction. \todo{find more works to reference}
+Previously, we merely formed a query out of plain text and ran it through Terrier. 
+Another option is to use a complex query consisting of formatted sub-queries. 
+Indri~\cite{strohman2005indri} is an existing search engine with this type of feature
+The Indri query language provides a format for representing queries with multiple probabilistic features and specific logical combinations. 
+A precursor to Indri was the Inquery search engine, which provided the basis for complex queries in a probabilistic retrieval model~\cite{callan1992inquery}. 
+I do indeed to propose to do this type of thing. 
+It lends itself well to the idea that there are distinct parts of the query we might want to focus on and weight differently. 
+We can also apply these ideas in order to provide different types of matching depending on the part of the query. 
+For example, we may wish to match named entities exactly, but also match them on surname only. 
+We need a query language and system which is flexible enough to allow for this kind of complex instruction. \todo{find more works to reference}
 
 \subsection{Learning to Rank}
-Learning to rank is well investigated application of machine learning to information retrieval. It allows one to learn a weighting system for features of a document in order to rank it in the most effective way. This is done using a training set of existing relevance judgements. There are several works which cover this topic which are relevant to the work we propose here.
-As has been show by Liu et al~\cite{liu2009learning} Listwise learning to rank often produces the best performance. This is compared to pointwise or pairwise learning to rank. \todo{why is this the case, more detail}
+Learning to rank is well investigated application of machine learning to information retrieval. 
+It allows one to learn a weighting system for features of a document in order to rank it in the most effective way. 
+This is done using a training set of existing relevance judgements. There are several works which cover this topic which are relevant to the work we propose here.
+As has been show by Liu et al~\cite{liu2009learning} Listwise learning to rank often produces the best performance. 
+This is compared to pointwise or pairwise learning to rank. \todo{why is this the case, more detail}
 Listwise learning to rank requires us to choose a specific effectiveness measure upon which to judge the effectiveness of the various features, this can be configured to any of the standard IR performance measures and so some investigation must take place in each distinct scenario to decipher which produces the best performance.
-Learning to rank requires the use of sampling in order to be effective~\cite{macdonald2013whens}. Sampling is used at two stages of the learning to rank process, when training the ranking model a sample of documents is obtained using an existing retrieval technique. The feature vectors for these documents are calculated and and retrieval measure is attempted to be maximised through re-ranking of these documents. This re-ranking will display which features of the documents are the most or least important. In fact, Dang et al~\cite{dang2013two} propose that we can actually view these sampling and re-ranking steps as two separate stages. A model can then be learned for the both the first stage and the second re-ranking stage. We seek to attain high recall in the first stage, so as to have as many relevant documents as possible to re-rank in the best possible order at the second stage. This presents another interesting avenue for this proposed research, whereby we may seek to discover which features we can identify which improve recall, for the first stage, and precision for the second. 
+Learning to rank requires the use of sampling in order to be effective~\cite{macdonald2013whens}. 
+Sampling is used at two stages of the learning to rank process, when training the ranking model a sample of documents is obtained using an existing retrieval technique. 
+The feature vectors for these documents are calculated and and retrieval measure is attempted to be maximised through re-ranking of these documents. 
+This re-ranking will display which features of the documents are the most or least important. In fact, Dang et al~\cite{dang2013two} propose that we can actually view these sampling and re-ranking steps as two separate stages. A model can then be learned for the both the first stage and the second re-ranking stage. We seek to attain high recall in the first stage, so as to have as many relevant documents as possible to re-rank in the best possible order at the second stage. This presents another interesting avenue for this proposed research, whereby we may seek to discover which features we can identify which improve recall, for the first stage, and precision for the second. 
 \todo{specific discussion of l2r implementation and what exists in Terrier, eg LambdaMART in JForests}
 
 \subsection{Other Uses of Machine Learning in IR}
-In~\cite{GeneratingQueriesLee12,xue2010improving} machine learning is used to effectively trim long queries, only keeping the learned best chunks of each query. This is done not using a gold standard training set of the best chunks from a section of text, but rather learns the importance of chunks by performing retrieval with them.
-Similarly, Bendersky et al~\cite{bendersky2010learning} learn the specific importance of terms within a query. They propose a method which is an extension the naive methods usually used to rank component terms of queries split (e.g. Tf-Idf). This is done through a combination of features, some based on information found within the query as well as without, through use of external information sources, such as Wikipedia and query logs from on-line search engines.
+\todo{could mention good old word embeddings here!}
+In~\cite{GeneratingQueriesLee12,xue2010improving} machine learning is used to effectively trim long queries, only keeping the learned best chunks of each query. 
+This is done not using a gold standard training set of the best chunks from a section of text, but rather learns the importance of chunks by performing retrieval with them.
+Similarly, Bendersky et al~\cite{bendersky2010learning} learn the specific importance of terms within a query. 
+They propose a method which is an extension the naive methods usually used to rank component terms of queries split (e.g. Tf-Idf). 
+This is done through a combination of features, some based on information found within the query as well as without, through use of external information sources, such as Wikipedia and query logs from on-line search engines.
 
 \subsection{Knowledge Base Linking and Query Expansion} \label{background_survey.knowledge_base}
 Query expansion is a commonly used IR technique which allows one to extend an existing query with additional terms. Often this is done using Pseudo-Relevance Feedback, which involves extracting terms from the set of top retrieved documents from a query and adding them to the query to return yet more results. This has been well examined in papers such as~\cite{cao2008selecting,yu2003improving}.
@@ -294,16 +423,39 @@ The end goal is a system which can identify related public domain documents for 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Proposed Approach}\label{proposed_approach}
-A basis exists already for this project in the form of the previous years software. We once again plan to use the Terrier \cite{macdonald2012puppy} search engine for the IR workload of this project. Terrier is developed and maintained at the University of Glasgow, so the local knowledge is invaluable. The proposed project developer also has extensive background with Terrier and so it makes sense to continue to use this search engine. We must however build a system on top of Terrier to perform the IR task at hand. Terrier does not have the facility which allows a full source document to be efficiently provided. It has a select number of tokenisers which extract terms from target documents and add them to an inverted index, however we must add custom terms to an inverted index in order to match on specific named entities and temporal references. In the subsequent sections we will discuss the various facets of this system and a proposed approach to implement each, as well as some investigation of feasibility and some preliminary testing. To conclude we discuss our proposed methods of evaluation.
+This section will describe the techniques and methods we propose to use in order to research the described problem.
+We draw inspiration from the works discussed in Section~\ref{background_survey}. 
+We wish to give a high level view of the various IR techniques than can be employed and how they can be evaluated.
+
+A basis exists already for this project in the form of the previous years software. 
+We once again plan to use the Terrier \cite{macdonald2012puppy} search engine for the IR workload of this project. 
+Terrier is developed and maintained at the University of Glasgow, so the local knowledge is invaluable. 
+The proposed project developer also has extensive background with Terrier and so it makes sense to continue to use this search engine. 
+We must however build a system on top of Terrier to perform the IR task at hand. 
+Terrier does not have the facility which allows a full source document to be efficiently provided. 
+It has a select number of tokenisers which extract terms from target documents and add them to an inverted index, however we must add custom terms to an inverted index in order to match on specific named entities and temporal references. In the subsequent sections we will discuss the various facets of this system and a proposed approach to implement each, as well as some investigation of feasibility and some preliminary testing. To conclude we discuss our proposed methods of evaluation.
 
 \subsection{Improved Named Entity Extraction}
-The most obvious and immediate thing to do would be to try and improve the named entity extraction techniques which exist already. Perhaps the easiest fix would be to identify n-gram named entities as a single named entity. Previously a name like ``Jerry Seinfeld'' would be tagged as~\code{jerry\_person seinfeld\_person}. Better performance may be yielded through~\code{jerry\_seinfeld\_person}. Other improvements may be to surround the named entities with some additional context. Named entity extraction will again be performed using Stanford CoreNLP~\cite{manning2014stanford}. In Section~\ref{proposedapproach.complexquery} we discuss how this bigram named entity can be effectively incorporated into a complex query.
+The most obvious and immediate thing to do would be to try and improve the named entity extraction techniques which exist already. 
+Perhaps the easiest fix would be to identify n-gram named entities as a single named entity. 
+Previously a name like ``Jerry Seinfeld'' would be tagged as \code{jerry\_person seinfeld\_person}. % better explanation exists here
+Better performance may be yielded through \code{jerry\_seinfeld\_person}. Other improvements may be to surround the named entities with some additional context. 
+Named entity extraction will again be performed using Stanford CoreNLP~\cite{manning2014stanford}. 
+In Section~\ref{proposedapproach.complexquery} we discuss how this bigram named entity can be effectively incorporated into a complex query.
 
 \subsection{Temporal Tagging and Matching}
-Another feature to easily extract is specific temporal information. We can do this through similar technology to the named entity tagger. In order to integrate this into our retrieval system we must index these specific times as terms in some way. This means we must produce a textual output for these times which Terrier can add to it's inverted index upon indexing.
-There are several temporal taggers in existence which could be integrated into the system. Since the project currently uses StanfordNLP~\cite{manning2014stanford} we can easily integrate SUTime~\cite{chang2012sutime}, the temporal tagger included in StanfordNLP into the project.
-There are several other choices of temporal taggers. Notably we have Heideltime~\cite{TemporalKuzeyEtAl2016}. However these are compared in~\cite{chang2012sutime} which shows SUTime to be the best performer. These two temporal taggers were chosen for comparison after review of some literature indicating they had very close or equivalent performance. Some studies find SUTime preferable, whereas others indicate that Heideltime performs better. Both have their flaws and strengths in different scenarios.
-It is important however to check that this is true for our own needs also. As such, some rudimentary tests were performed on to compare the effectiveness on date resolution of Heideltime and SUTime. \todo{why do we think this is even a good idea, in order to justify the next section} \todo{need citations}
+Another feature to easily extract is specific temporal information. 
+We can do this through similar technology to the named entity tagger. 
+In order to integrate this into our retrieval system we must index these specific times as terms in some way. 
+This means we must produce a textual output for these times which Terrier can add to it's inverted index upon indexing.
+There are several temporal taggers in existence which could be integrated into the system. 
+Since the project currently uses StanfordNLP~\cite{manning2014stanford} we can easily integrate SUTime~\cite{chang2012sutime}, the temporal tagger included in StanfordNLP into the project.
+There are several other choices of temporal taggers. 
+Notably we have Heideltime~\cite{TemporalKuzeyEtAl2016}. However these are compared in~\cite{chang2012sutime} which shows SUTime to be the best performer. 
+These two temporal taggers were chosen for comparison after review of some literature indicating they had very close or equivalent performance. 
+Some studies find SUTime preferable, whereas others indicate that Heideltime performs better. Both have their flaws and strengths in different scenarios.
+It is important however to check that this is true for our own needs also. 
+As such, some rudimentary tests were performed on to compare the effectiveness on date resolution of Heideltime and SUTime. \todo{why do we think this is even a good idea, in order to justify the next section} \todo{need citations}
 
 \subsubsection{Temporal Tagging Comparison}
 In this section we present our comparison of the two temporal taggers through an evaluation of their effectiveness on 10 documents which contain relative references to time (e.g. ``\textit{yesterday}'', ``\textit{last month}'').
@@ -325,44 +477,75 @@ Both taggers required minimal effort to integrate with our existing system. In f
 \hline
 & \multicolumn{4}{|c|}{SUTime}    & \multicolumn{4}{|c|}{Heideltime} \\ 
 \cline{2-9}
-Document & TP  & FP  & TN   & FN    & TP & FP & TN   & FN    \\ \hline
-1        & 11  & 1   & 374  & 0	    & 12 & 0  & 374  & 0     \\ \hline
-2        & 5   & 0	 & 788  & 0	    & 5  & 0  & 788  & 0     \\ \hline
-3		 & 3   & 0   & 228  & 0		& 3  & 0  & 228  & 0	 \\ \hline
-4        & 1   & 1	 & 70   & 0		& 2  & 0  & 70   & 0	 \\ \hline
-5	     & 2   & 0	 & 64   & 0		& 2	 & 0  & 64   & 0     \\ \hline
-6		 & 14  & 0	 & 285  & 2		& 15 & 0  & 285  & 1     \\ \hline
-7		 & 12  & 0	 & 389  & 0		& 11 & 0  & 390  & 1	 \\ \hline
-8		 & 2   & 0	 & 71   & 0	  	& 2	 & 0  & 71   & 0	 \\ \hline
-9		 & 9   & 0	 & 287  & 0		& 9	 & 0  & 287  & 0	 \\ \hline
-10		 & 7   & 1	 & 272  & 0		& 8	 & 0  & 271  & 0	 \\ \hline
-Total    & 66  & 3	 & 2828 & 2	  	& 69 & 0  &	2828 & 2     \\ \hline
+Document & TP  & FN & FP & TN     & TP & FN & FP & TN    \\ \hline
+1        & 11  & 0  & 1  & 374	  & 12 & 0  & 0  & 374   \\ \hline
+2        & 5   & 0  & 0	 & 788 	  & 5  & 0  & 0  & 788   \\ \hline
+3		     & 3   & 0  & 0  & 228		& 3  & 0  & 0  & 228 	 \\ \hline
+4        & 1   & 0  & 1	 & 70  		& 2  & 0  & 0  & 70  	 \\ \hline
+5	       & 2   & 0  & 0	 & 64  		& 2	 & 0  & 0  & 64    \\ \hline
+6		     & 14  & 2  & 0	 & 285 		& 15 & 1  & 0  & 285   \\ \hline
+7		     & 12  & 0  & 0	 & 389 		& 11 & 1  & 0  & 390 	 \\ \hline
+8		     & 2   & 0  & 0	 & 71  	  & 2	 & 0  & 0  & 71  	 \\ \hline
+9		     & 9   & 0  & 0	 & 287 		& 9	 & 0  & 0  & 287 	 \\ \hline
+10		   & 7   & 0  & 1	 & 272 		& 8	 & 0  & 0  & 271 	 \\ \hline
+Total    & 66  & 2  & 3	 & 2828	  & 69 & 2  & 0  & 2828  \\ \hline
 F1-Score & \multicolumn{4}{|c|}{0.9635} & \multicolumn{4}{|c|}{0.9928} \\ \hline
 Accuracy & \multicolumn{4}{|c|}{0.9982} & \multicolumn{4}{|c|}{0.9997} \\ \hline
 \end{tabular}
 \caption{Heideltime vs. SUTime on Sample Source and Target Documents}
 \label{temporalcomparison}
 \end{table}
-Both display high measures of effectiveness, however Heideltime appears to better for our purposes. Through the course of the manual review of the data this can be confirmed. Heideltime seemed more close to way a human would identify dates (for example, ``the same day'' above). The date ranges that Heideltime identifies could also be helpful in the future of this project. Due to these results, we propose to use Heideltime as the temporal tagger to extract dates for query generation.
+Both display high measures of effectiveness, however Heideltime appears to be marginally better for our purposes. 
+Through the course of the manual review of the data this conclusion can be confirmed. 
+Heideltime seemed more close to way a human would identify dates (for example, ``the same day'' above). 
+The date ranges that Heideltime identifies could also be helpful in the future of this project. 
+Due to these results, we propose to use Heideltime as the temporal tagger to extract dates for query generation.
 
-\subsubsection{Using Temporal Tagging}
+\todo{Detail the false negatives, a table format is suggested}
+
+\subsection{Use of Temporal Tagging}
 Although we plan to use Heideltime for temporal tagging of source and target documents, we must now understand how we can incorporate this into the retrieval model.
-As discussed in \ref{background_survey} there are several existing approaches using temporal matching that we could implement and extend. \cite{} propose a method for estimating document focus time. Combined with the work in \cite{li2003time} we could more heavily weight documents which were created on (or near) this focus time. Another approach is to directly compare the temporal entities in a source document with those in target documents, as is discussed in \cite{makkonen2004simple}. We could attempt to improve upon their temporal similarity vector approach, which they concede is not excellent.
+As discussed in \ref{background_survey} there are several existing approaches using temporal matching that we could implement and extend.
+We propose, at least intitially, to represent temporal entities textually as a string. 
+In the retrieval model we can then match exactly these temporal entities in source and target documents.
+If this proves successful and time allows, we may look to extending the use of this temporal tagging. Makkonen et al~\cite{makkonen2004simple} describe a temporal similarity vector approach.
+Although they concede that this is not excellent, it could provide a baseline to extend upon.
+Further, another interesting method appears in~\cite{jatowt2013estimating}, where Jatowt et al propose a method for estimating document focus time. 
+Combined with the work of Li et al in \cite{li2003time} we could weight more heavily documents which were created on (or near) this focus time.
 
-The approach should therefore be to implement these various features and learn a model in Terrier which applies this (in various ways) to ranking, using learning to rank. These combinations of ranking models can then be compared in order to decide which use of temporal information is the best.
+The approach should therefore be to implement these various features and learn a model in Terrier which applies this (in various ways) to ranking, using learning to rank. 
+These combinations of ranking models can then be compared in order to decide which use of temporal information is the best.
 
 \subsection{Better and More General Query Generation}
-We can see from \cite{GeneratingQueriesLee12} that various methods can be employed to turn a piece of text into a query. Not only must we identify named entities and temporal data (see above), but we must also consider other n-grams within the text. For example from the text "Hillary Clinton was today campaigning to become the democratic presidential nominee." we can produce a query of the named entities: "hillary\_person clinton\_person democratic\_organization". Clearly, however this lacks much of the context from the original text. A more realistic query to form from this text would be "hillary\_clinton\_person democrat\_organization nominee campaign". This contains far more of the relevant data in the original text. Although we emphasize the role of temporal data in this research proposal, it must not be overlooked that in order to have a functional and performant retrieval system other features like named entities must be taken into account. We propose continue to use the named entity indexing step from the previous project as detailed in \cite{DissertationKelvinFowler} and extend it by allowing for the extration of n-gram named entities instead of only tagging unigrams.
+We can see from \cite{GeneratingQueriesLee12} that various methods can be employed to turn a piece of text into a query. 
+Not only must we identify named entities and temporal data (see above), but we must also consider other n-grams within the text. 
+For example from the text ``Hillary Clinton was today campaigning to become the democratic presidential nominee.'' we can produce a query of the named entities: ``hillary\_person clinton\_person democratic\_organization''. 
+Clearly, however this lacks much of the context from the original text. 
+A more realistic query to form from this text would be ``hillary\_clinton\_person democrat\_organization nominee campaign''. 
+This contains far more of the relevant data in the original text. 
+Although we emphasize the role of temporal data in this research proposal, it must not be overlooked that in order to have a functional and performant retrieval system other features like named entities must be taken into account. 
+We propose continue to use the named entity indexing step from the previous project as detailed in \cite{DissertationKelvinFowler} and extend it by allowing for the extration of n-gram named entities instead of only tagging unigrams.
 
 \subsection{Combining Query Information to Create a Complex Query}
 \label{proposedapproach.complexquery}
-A prototype version of Terrier v.5 has been provided for this project. This allows the use of some of the features of the Indri Query Language. The Indri Query Language provides specified syntax to produce structured complex queries. These queries can be parsed and actioned appropriately by a search engine, such as Terrier.
+A prototype version of Terrier v.5 has been provided for this project. 
+This allows the use of some of the features of the Indri Query Language. 
+The Indri Query Language provides specified syntax to produce structured complex queries. 
+These queries can be parsed and actioned appropriately by a search engine, such as Terrier.
 
-This has clear applications to our problem domain. One can take a given source document and extract from it named entities (persons, locations, organisations), explicit time stamps and other chunks.
+This has clear applications to our problem domain. 
+One can take a given source document and extract from it named entities (persons, locations, organisations), explicit time stamps and other chunks.
 
-The Indri Query Language, as it is implemented in Terrier, however requires our target documents to be in a specific format. \todo{does it actually? and in Terrier?} This means, in a similar vein to the previous years project we must index and alter all of the target documents in a specific way, in order to pick up the correct terms and entities.
+The Indri Query Language, as it is implemented in Terrier, however requires our target documents to be in a specific format. 
+\todo{does it actually? and in Terrier?} 
+This means, in a similar vein to the previous years project we must index and alter all of the target documents in a specific way, in order to pick up the correct terms and entities.
 
-Some considerations for this type of complex query are the fact that often surnames are used a synonyms for full names. This could be accounted for by including extracting the final word from n-gram person named entities and including that in the query. Another is how to use the time information discussed above. Initially it seems reasonable to just match on exact dates, however we could implement more general features that examine time intervals. Finally we have a lot of other information present in a document which is neither temporal references nor named entities such as noun phrases, verb phrases and other n-grams. This can be included in the complex query as is and weighted appropriately.
+Some considerations for this type of complex query are the fact that often surnames are used a synonyms for full names. 
+This could be accounted for by including extracting the final word from n-gram person named entities and including that in the query. 
+Another is how to use the time information discussed above. 
+Initially it seems reasonable to just match on exact dates, however we could implement more general features that examine time intervals. 
+Finally we have a lot of other information present in a document which is neither temporal references nor named entities such as noun phrases, verb phrases and other n-grams. 
+This can be included in the complex query as is and weighted appropriately.
 
 \begin{codelisting}
 \begin{minted}[breaklines,breaksymbolleft={}]{java}
@@ -374,12 +557,38 @@ Some considerations for this type of complex query are the fact that often surna
 \label{code:indrisample}
 \end{codelisting}
 
-\subsection{Learning to Rank}
+\subsection{Learning to Rank}\label{proposed_approach.l2r}
+As discussed in Section~\ref{background_survey.l2r} learning to rank is an information retreival technique which has been applied with great success in many scenarios.
+By using learning to rank we can not only tweak our retrieval system accordingly to achieve the best performance, but we can measure the importance of various features.
+In order to begin to answer \textbf{RQ1} we must identify features which correspond to the use of each individual class of extracted information (named entities, temporal entities, other chunks, etc.).
+The idea here being the after the learning to rank process a weigh will be applied ot the usage of each one of these classes.
+IndirQL has a feature which allows one to supply a weight to sections of a complex query. 
+Although this has not been directly implemented in Terrier we can do something analagous.
+By considering a set of query dependent features which are functions of the number of matches of a given class of extracted information, we can weight these features accordingly.
+\todo{would be really nice to have some maths here explaining what is going on}
 \todo{We certainly have to do something, but what exactly is it?}
 \textbf{We will investigate by using learning to rank and evaluate the effectiveness of...}
+The above described approach gives us the opportunity to begin to answer \textbf{RQ1} by examining the learned weights of these features.
+There is indeed more we can do with learning to rank.
+Often other types of features are employed which do not depend on the query at all. 
+These are called query dependent features.
+It will be worthwhile to investigate if the inclusion of certain query dependent features (e.g. BM25 score or PageRank) have a positive effect on the learned model.
+This relates to \textbf{RQ2} in that it seeks to supply additional techniques to improve the effectivenss of the IR system.
+
+Active learning as described by \cite{GeneratingQueriesLee12} is also relevant, however is beyond the scope of this work.
+
+We propose to use listwise learning to rank, as it has been shown to generally have the best performance in most IR tasks.
+Included in Terrier is the JForests implementation of the LambdaMART listwise learning to rank technique. Using this will require very little tweaking. \todo{not really a good reason to choose it}
+
 With this proposed retrieval model in mind, leveraging IndriQL~\cite{strohman2005indri}, we now have a good set of features which we can use to learn a model for retrieval.
-IndriQL provides us with the ability to give a weight to different parts of query, however this has not directly been implemented in Terrier. Instead we can use the existing learning to rank technology in Terrier to automatically weight query sections or sub queries in the most appropriate way.  We hypothesize for example that the named entities in a source document will be more important that the time references. Thus they should be weighted more heavily in the retrieval model. L2R can do this automatically assuming we give it appropriate features from which to calculate a weighting model. What follows are some of the proposed features we will give to learning to rank
+IndriQL provides us with the ability to give a weight to different parts of query, however this has not directly been implemented in Terrier. 
+Instead we can use the existing learning to rank technology in Terrier to automatically weight query sections or sub queries in the most appropriate way.  
+We hypothesize for example that the named entities in a source document will be more important that the time references. 
+Thus they should be weighted more heavily in the retrieval model. 
+L2R can do this automatically assuming we give it appropriate features from which to calculate a weighting model. 
+What follows are some of the proposed features we will give to learning to rank
 \paragraph{Query Dependent Features}
+Features are expressed as subsqueries in the concrete implentation, however they can be thought of as function of the following:
 \begin{enumerate}[label=\textbf{F. \arabic*}]
 \item No. of exact matches of named entities from the query
 \item Number of exact matches of temporal entities from the query
@@ -392,17 +601,36 @@ Typically we can also use other features in the reranking of documents. These mi
 Active learning would be interesting but is beyond the scope of this work.
 To prevent overfitting we must not use all of the relevance judgements from the test collection in the learning to rank phase. This means we will have unseen topics and relevance judgements with which to evaluate the effectiveness of the learned models.
 
-Likely going to use LambdaMART as it is implemented by JForests and included in the distribution of terrier. As discussed in Section~\ref{background_survey.l2r} this is a listwise learning to rank technique and often shows excellent results across different tasks. It also allows us to alter the evaluation measure we wish to use in order to learn the best possible model. Our evaluation section will discuss the different measures used in learning to rank and the effect this has on the results.
+Likely going to use LambdaMART as it is implemented by JForests and included in the distribution of terrier. 
+As discussed in Section~\ref{background_survey.l2r} this is a listwise learning to rank technique and often shows excellent results across different tasks. It also allows us to alter the evaluation measure we wish to use in order to learn the best possible model. Our evaluation section will discuss the different measures used in learning to rank and the effect this has on the results.
 
 \subsection{Knowledge Base Linking and Query Expansion}
-Query expansion is another popular IR technique that was not touched upon in the previous work. Knowledge base linking can be used successfully in conjunction with query expansion to include in queries well defined references to specific events or people. An example of how this could help is by resolving a general term like "The President" to a more specific reference to say, "Barack Obama". This is analogous to the resolution of specific times as mentioned above, however comes with the extra step of spatial awareness in the document. We can only resolve this example if the context of the document is the USA. This presents an interesting challenge in itself, which we may cover in more detail in future work \todo{doesn't really make that much sense, but there is something there}.
+Query expansion is another popular IR technique that was not touched upon in the previous work. 
+Knowledge base linking can be used successfully in conjunction with query expansion to include in queries well defined references to specific events or people. 
+An example of how this could help is by resolving a general term like ``The President'' to a more specific reference to say, ``Barack Obama''. 
+This is analogous to the resolution of specific times as mentioned above, however comes with the extra step of spatial awareness in the document. We can only resolve this example if the context of the document is the USA. 
+This presents an interesting challenge in itself, which we may cover in more detail in future work \todo{doesn't really make that much sense, but there is something there}.
 
 \subsection{Overview of Approach}
+The approach can be summarised in the following way.
+First, we must build an index from the target collection. During this indexing step we must extract named entities, temporal enities and othe n-gram chunks. 
+We may decide that other information is to be extracted also.
+We must organise the index in such a way that these specific classes of extracted information are easily accessible during retrieval.
+
+Given a source document we must again analyse it, and extract the various classes of information.
+These form a complex query using the parts of the IndriQL contained in Terrier.
+
+These complex queries will be used in a custom learning to rank system which will learn weights of various features corresponding to each class of extracted information.
+
+This learned model will be applied to queries generated from unseen source documents.
+
+Fig. x demonstrates this flow of information in a graphical way.
+
 \todo{include image}
 
 \subsubsection{Full Worked Example}
-We now give a full example of the various subquery components we extract from the text
-
+This section gives a worked example of the various classes of information we wish to extract from source document in order to create complex queries.
+Provided is a document which is representative of a source document.
 \paragraph{Topic}
 TREC Topic 51
 Topic: Airbus Subsidies
@@ -411,60 +639,31 @@ trade dispute between Airbus and a U.S. aircraft producer over the issue of
 subsidies. 
 
 \paragraph{Full Text}
-Senior officials from Britain, France, West Germany
-and Spain on Tuesday ordered Europe's Airbus Industrie to try to
-reach an agreement on industrial and commercial cooperation with
-McDonnell Douglas Corp. by mid-1988.
-   
-The decision emerged at the end of a one-day meeting of
-transport ministers and chief executives of the industrial partners
-in the European commercial aircraft group.
+Senior officials from Britain, France, West Germany and Spain on Tuesday ordered Europe's Airbus Industrie to try to reach an agreement on industrial and commercial cooperation with McDonnell Douglas Corp. by mid-1988.
 
-Aviation industry observers said it was the latest display of
-Europe's eagerness to penetrate the lucrative U.S. market while
-trying to reduce trade friction over American claims of unfair
-competition by Airbus.
-   
-Trade negotiators from the United States, the European Community
-Commission and the four Airbus partner-countries are scheduled to
-meet in Konstanz, West Germany, March 18 to discuss U.S. claims
-that the Europeans unfairly subsidize the consortium.
-   
-French Transport Minister Jacques Douffiagues told reporters
-after the ministers' meeting that Airbus' mandate is ``unlimited,''
-although the negotiations would tend to focus more on planned
-aircraft than on existing programs.
-   
-A cooperation accord with McDonnell could take the form of a
-joint venture or co-production scheme, he said.
-   
-Douffiagues suggested that possible areas of useful cooperation
-between Airbus and Mcdonnell could include small short-range jets
-with between 100-150 seats as well as large aircraft with 350 seats
-or more. ``There is no upper limit,'' he said.
-   
-``Any agreement with Mcdonnell must be balanced, taking account
-of the advantages and constraints for both sides,'' Douffiagues
-said.
-   
-Douffiagues said part of the interest in an agreement is that it
-would ease Airbus's access to the U.S. market, where the group has
-only three customers.
-   
-A statement released after the meeting said Airbus' mandate is
-to negotiate ``diligently'' and ``with a will to reaching a
-balanced agreement that is beneficial to the two parties.''
-   
-The industrial partners of the Airbus consortium \_ France's
-Aerospatiale, Britain's Aerospace, Messerschmitt-Boelkow-Blohm of
-West Germany and Spain's Construcciones Aeronauticas \_ have had
-contacts with Mcdonnell for almost two years now on eventual
-cooperation.
-   
-Previous talks with McDonnell Douglas on possible cooperation
-collapsed in 1986.
+The decision emerged at the end of a one-day meeting of transport ministers and chief executives of the industrial partners in the European commercial aircraft group.
 
-\paragraph{Named entities}
+Aviation industry observers said it was the latest display of Europe's eagerness to penetrate the lucrative U.S. market while trying to reduce trade friction over American claims of unfair competition by Airbus.
+
+Trade negotiators from the United States, the European Community Commission and the four Airbus partner-countries are scheduled to meet in Konstanz, West Germany, March 18 to discuss U.S. claims that the Europeans unfairly subsidize the consortium.
+
+French Transport Minister Jacques Douffiagues told reporters after the ministers' meeting that Airbus' mandate is ``unlimited,'' although the negotiations would tend to focus more on planned aircraft than on existing programs.
+
+A cooperation accord with McDonnell could take the form of a joint venture or co-production scheme, he said.
+
+Douffiagues suggested that possible areas of useful cooperation between Airbus and Mcdonnell could include small short-range jets with between 100-150 seats as well as large aircraft with 350 seats or more. ``There is no upper limit,'' he said.
+
+``Any agreement with Mcdonnell must be balanced, taking account of the advantages and constraints for both sides,'' Douffiagues said.
+
+Douffiagues said part of the interest in an agreement is that it would ease Airbus's access to the U.S. market, where the group has only three customers.
+
+A statement released after the meeting said Airbus' mandate is to negotiate ``diligently'' and ``with a will to reaching a balanced agreement that is beneficial to the two parties.''
+
+The industrial partners of the Airbus consortium \_ France's Aerospatiale, Britain's Aerospace, Messerschmitt-Boelkow-Blohm of West Germany and Spain's Construcciones Aeronauticas \_ have had contacts with Mcdonnell for almost two years now on eventual cooperation.
+
+Previous talks with McDonnell Douglas on possible cooperation collapsed in 1986.
+
+\paragraph{Named Entities}
 We can extract the named entities from the above text as follows:
 Locations
 Britain
@@ -547,26 +746,66 @@ Thus, we have outlined a specific approach we might follow in order to implement
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%   WORK PLAN  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Work Plan} \label{work_plan}
 \todo{work plan is very bare}
-With the above proposed approach in mind we can set some definitive milestones for this research project.
+With the proposed approach detailed in the previous section we can describe some implementation details of this proposed approach and define some milestones of completion.
+% With the above proposed approach in mind we can set some definitive milestones for this research project.
 
-With the proposed approach laid out above in Section~\ref{proposed_approach} we can now give a definitive description of the work that will need to be done in order to complete this research. This section will give an overview of the tasks that must be completed and will end with a Gantt Chart defining time scales for each section.
+% With the proposed approach laid out above in Section~\ref{proposed_approach} we can now give a definitive description of the work that will need to be done in order to complete this research. This section will give an overview of the tasks that must be completed and will end with a Gantt Chart defining time scales for each section.
 
+
+\todo{Try to give a more detailled explantation of the code you intent to Write}
+% Theres gotta be an indexing phase, applied to both the source and target collections
+% This indexing phase is going to have various steps, each of which you can describe in some detail.
+% Then, depending on if it's source or target documents you actually have to something concrete with the info you extract.
+% For source you'll be extracting and saving the individual bits in order to generate queries at a later date (might be a nice idea to allow different query formulations from one indexing pass)
+% For target you need to add the terms to various (posting lists?????)
+% Next is actual query generation, this isnt a textual thing to you can describe how you plan to pass the subquery components to terrier programatically.
+% Then theres the actual retrieval, as in plumbing it all together to let terrier do it's thing.
+% Then there's learning to rank where we let terrier figure out how to weight the different features (whatever these features might be, need to be clear about that)
+% Evaluation next, create the test collection
+% Do the evaluation using trec_eval in built into terrier
+% Analyse the results
+% Write up the dissy
+
+% Theres very clear steps here, how do you go about seperating the ``proposed apporach'' to the work plan. Like where do we do the comparison of heideltime and sutime.
+% Need to somehow effectively describe what a feature is....
 \subsection{Query Component Extraction}
-In order to formulate our complex queries as described in Section~\ref{proposedapproach.complexquery}, we must create a system which can read in a source document and return a collection of the complex query components. In order to extract the Named Entities we can continue to use StanfordNLP in a similar way to how it was used in the previous project, with some slight adjustments. We wish to extract n-gram named entities instead of tagging single constituent words. This will just require a slight tweaking of the StanfordNLP configuration. Next we will use Heideltime to extract the temporal entities from documents. This however means we must propose a system which can decipher document origin dates as they exist in their doc id tags. For the purposes of matching during indexing the target collection must be analysed by the same methods and have the same formatted temporal tags added to the inverted index. The initial proposed method also requires extraction of other noun phrase chunks in order to add terms which provide context to the query in addition to the named and temporal entities. As suggested this can also be performed using the StanfordNLP toolkit, either through the CoreNLP pipeline or the standalone Stanford parser. These both allow Parts-Of-Speech (POS) tagging, which in turn allows extraction of noun phrases, which will form our chunks.
+In order to formulate our complex queries as described in Section~\ref{proposedapproach.complexquery}, we must create a system which can read in a source document and return a collection of the complex query components. 
+In order to extract the Named Entities we can continue to use StanfordNLP in a similar way to how it was used in the previous project, with some slight adjustments. 
+We wish to extract n-gram named entities instead of tagging single constituent words. 
+This will just require a slight tweaking of the StanfordNLP configuration. 
+Next we will use Heideltime to extract the temporal entities from documents. 
+This however means we must propose a system which can decipher document origin dates as they exist in their doc id tags. 
+For the purposes of matching during indexing the target collection must be analysed by the same methods and have the same formatted temporal tags added to the inverted index. 
+The initial proposed method also requires extraction of other noun phrase chunks in order to add terms which provide context to the query in addition to the named and temporal entities. 
+As suggested this can also be performed using the StanfordNLP toolkit, either through the CoreNLP pipeline or the standalone Stanford parser. 
+These both allow Parts-Of-Speech (POS) tagging, which in turn allows extraction of noun phrases, which will form our chunks.
 
 \subsection{Complex Queries}
-With these query components created we can now explicitly form or complex query, using the IndriQL features provided by Terrier v5. This may require some expansion depending on what query combinators are available. We may have to make new custom sizes of unordered windows. This query will not be a textual query, in that it will not be provided to Terrier as merely text, but rather programmatically. Initially these queries will take a simple form of the various query components discussed above. However more query formulations can be created in due course. 
+With these query components created we can now explicitly form or complex query, using the IndriQL features provided by Terrier v5. 
+This may require some expansion depending on what query combinators are available. We may have to make new custom sizes of unordered windows. 
+This query will not be a textual query, in that it will not be provided to Terrier as merely text, but rather programmatically. 
+Initially these queries will take a simple form of the various query components discussed above. 
+However more query formulations can be created in due course. 
 % This means we can match exactly bigram named entities as well as matching temporal expressions as unigrams. We can also match the other chunks. We can give each of these parts of the query a label. We should do this in several different configurations to ensure we are not missing any important query formulations.
 
 \subsection{Learning to Rank}
-With the query formulations generated we must run these through the learning to rank system in Terrier in order to produce the appropriate weighting to give each part of the complex query, as well as to any other features we may use. Learning to rank will performed with the JForests implementation of LambdaMART as discussed in Section~\cite{NEEDED}. The sampling step for learning to rank will initially use a naive measure such as BM25 to gather results \todo{what query do we use here.} Subsequently, the existing relevance judgements in the test collection can be used to train the model. Following some evaluation at this stage to ensure we are on the correct track, all query formulations can be provided to the learning framework. As discussed in \cite{NEEDED}, the sampling step can be improved by using a more complex retrieval framework at this stage. This should be done for all query configurations in order to have sufficient data for comparisons.
+With the query formulations generated we must run these through the learning to rank system in Terrier in order to produce the appropriate weighting to give each part of the complex query, as well as to any other features we may use. 
+Learning to rank will performed with the JForests implementation of LambdaMART as discussed in Section~\cite{NEEDED}. 
+The sampling step for learning to rank will initially use a naive measure such as BM25 to gather results \todo{what query do we use here.} 
+Subsequently, the existing relevance judgements in the test collection can be used to train the model. 
+Following some evaluation at this stage to ensure we are on the correct track, all query formulations can be provided to the learning framework. 
+As discussed in \cite{NEEDED}, the sampling step can be improved by using a more complex retrieval framework at this stage. 
+This should be done for all query configurations in order to have sufficient data for comparisons.
 
 % \subsection{Formulate Test Collection}
 % We can use the process described in Section~\ref{existingrelevance} to generate our source collection from which to generate queries. Ideally this source collection would be fairly large in order to produce a good amount of data for evaluation.
 
 \subsection{Evaluation}
-Evaluation should begin as soon as there is a reasonable system upon which to evaluate. We will use Terrier's existing functionality to generate measurements of the suggested evaluation metrics discussed in Section~\cite{NEEDED}. The experiments will be crafted in direct response to the hypotheses from Section~\cite{NEEDED}.
-With the source collection created we can run experiments using Terrier in order to produce results in the measures described in Section~\ref{evalmeasures}. These experiments will be run on each query configuration along with it's calculated weights after learning to rank.
+Evaluation should begin as soon as there is a reasonable system upon which to evaluate. 
+We will use Terrier's existing functionality to generate measurements of the suggested evaluation metrics discussed in Section~\cite{NEEDED}. 
+The experiments will be crafted in direct response to the hypotheses from Section~\cite{NEEDED}.
+With the source collection created we can run experiments using Terrier in order to produce results in the measures described in Section~\ref{evalmeasures}. 
+These experiments will be run on each query configuration along with it's calculated weights after learning to rank.
 
 \subsection{Further Work}
 This work plan is flexible and allows the ability to add other features as we proceed. 
@@ -587,10 +826,10 @@ Once all of the above has been completed and evaluated we can look forwards to i
 |}
 % The top line
 \textbf{Gantt chart} & \multicolumn{4}{c!{\vrule width 0.4mm}}{December} 
-           & \multicolumn{4}{c!{\vrule width 0.4mm}}{January}
-           & \multicolumn{4}{c!{\vrule width 0.4mm}}{February} 
-           & \multicolumn{4}{c!{\vrule width 0.4mm}}{March} 
-           & \multicolumn{4}{c|}{April} \\
+& \multicolumn{4}{c!{\vrule width 0.4mm}}{January}
+& \multicolumn{4}{c!{\vrule width 0.4mm}}{February} 
+& \multicolumn{4}{c!{\vrule width 0.4mm}}{March} 
+& \multicolumn{4}{c|}{April} \\
 % The second line, with its five years of four quarters
 %\rpt[5]{& 1 & 2 & 3 & 4} \\
 \hline
