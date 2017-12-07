@@ -700,7 +700,9 @@ We can also resolve the following specific temporal references from the text usi
 Having given an explanation of the proposed approach the implementation of this research will take we now explain how we can evaluate it's effectiveness.
 
 \subsubsection{Hypotheses}
-We have formed some hypotheses in response the research questions proposed in Section~\ref{problem_statement}. These hypotheses allows us to design and plan efficient experiments for evaluating the effectiveness of our proposed IR system. The hypotheses are formed in direct response to the research questions \textbf{RQ1} and \textbf{RQ2}
+We have formed some hypotheses in response the research questions proposed in Section~\ref{problem_statement}. 
+These hypotheses allows us to design and plan efficient experiments for evaluating the effectiveness of our proposed IR system. 
+The hypotheses are formed in direct response to the research questions \textbf{RQ1} and \textbf{RQ2}.
 
 \begin{enumerate}[label=\textbf{Hyp.\arabic*}]
 \item Temporal Information will be less important to complex queries than named entities and other terms.
@@ -713,7 +715,6 @@ In response to \textbf{RQ1}:
 \begin{enumerate}[label=\textbf{Null Hyp.\arabic*}]
 \item Including temporal information will have no effect on query performance
 \item Including other chunks, like noun phrases will have no effect on query performance.
-\item Extraction of named entities for use in a query provides the best retrieval performance.
 \setcounter{nullhyp}{\value{enumi}}
 \end{enumerate}
 
@@ -724,14 +725,19 @@ In response to \textbf{RQ2}:
 \item We cannot efficiently and effectively extract information from source documents to formulate a complex query consisting of multiple classes of information.
 \end{enumerate}
 
+Having defined the null hypotheses we now define the hypotheses based on our observations from the related literature.
+
 \subsubsection{Effectiveness Measures} \label{evalmeasures}
 In order to evaluate the effectiveness of the retrieval system in relation to the above hypotheses we must employ formal measures of comparison.
 Information retrieval is usually measures in terms of \textit{precision} and \textit{recall}. \textit{Precision} is the measure of how many of the retrieved documents are relevant, whereas \textit{recall} is a measure of how many of the total number of relevant documents were retrieved.
-The most important and ubiquitous measure is likely \textit{Mean Average Precision} (MAP). MAP is commonly used in experiments involving TREC collections as it gives a good objective overview of the performance of given system and is well understood IR research communities.
-\textit{Precision at 5/10} (P\@5/10) This measure allows us to measure the precision at the first n documents returned. That is, we can see a measure of how effective the system is a retrieving and ranking documents close to the top.
+The most important and ubiquitous measure is likely \textit{Mean Average Precision} (MAP). 
+MAP is commonly used in experiments involving TREC collections as it gives a good objective overview of the performance of given system and is well understood IR research communities.
+\textit{Precision at 5/10} (P\@5/10) This measure allows us to measure the precision at the first n documents returned. 
+That is, we can see a measure of how effective the system is a retrieving and ranking documents close to the top.
 \textit{Mean Reciprocal Rank} (MRR) allows us to measure in a list of ranked results how close the top of the list the first relevant result was. The closer to the first rank the better.
 
-In the L4 Project~\cite{DissertationKelvinFowler} the \textit{All Terms Query} was regarded as too slow to justify its use in an interactive user environment. This proposed research is a continued investigation into assisting the sensitivity review process at The National Archives so it is prudent to continue to measure query execution time. We must ensure that query results are returned in a reasonable time. %Justify the inclusion of this a little more
+In the L4 Project~\cite{DissertationKelvinFowler} the \textit{All Terms Query} was regarded as too slow to justify its use in an interactive user environment. 
+This proposed research is a continued investigation into assisting the sensitivity review process at The National Archives so it is prudent to continue to measure query execution time. We must ensure that query results are returned in a reasonable time. %Justify the inclusion of this a little more
 
 \subsubsection{Test Collection}
 \todo{add table showing collection statistics}
@@ -742,8 +748,15 @@ In order to ensure using existing topics and relevance judgements is a reasonabl
 Last years results were compared with results using the new test collection to ensure we retrieved comparable results. A detailed explanation can be seen below~\cite{NEEDED}
 % Separate approach from implementation details
 
-Drawing inspiration from Lee et al~\cite{GeneratingQueriesLee12} we propose to also use the collection of target documents as representative source documents. The generation of a test collection is an expensive task which requires many hours of manual work. In In order to do this we must look specifically at the existing topics and relevance judgements provided for the TREC 1 Ad-Hoc task. If we take a topic, we cant take a selected relevant document for this topic and use this document from which to generate queries. Provided the document is analogous in some way to the original query then the information need of ``public domain documents relating to this document'' is fulfilled by the relevant documents according to the qrels for the original topic.
-We can form an effective test collection by choosing a number \code{N} of topics. For each of these topics we can choose a random relevant document according to the corresponding qrel entry. We must then check if the document is representative of the initial topic (as in it is representative of the description in the trec topics file). Then this document can be added to the source collection.
+Drawing inspiration from Lee et al~\cite{GeneratingQueriesLee12} we propose to also use the collection of target documents as representative source documents. 
+The generation of a test collection is an expensive task which requires many hours of manual work. 
+In In order to do this we must look specifically at the existing topics and relevance judgements provided for the TREC 1 Ad-Hoc task. 
+If we take a topic, we cant take a selected relevant document for this topic and use this document from which to generate queries. 
+Provided the document is analogous in some way to the original query then the information need of ``public domain documents relating to this document'' is fulfilled by the relevant documents according to the qrels for the original topic.
+We can form an effective test collection by choosing a number \code{N} of topics. 
+For each of these topics we can choose a random relevant document according to the corresponding qrel entry. 
+We must then check if the document is representative of the initial topic (as in it is representative of the description in the trec topics file). 
+Then this document can be added to the source collection.
 Note that this method means we must ignore the source document if it appears in the result set for a query, since it is likely to appear and must remain in the target collection for other queries.
 
 In fact we can make this method even more comprehensive by rotating the document in use as a source document. Given a topic \code{T} and a set of relevant documents \code{D}, we can take every document $ d \in D $. We might assume that if our retrieval system is optimal creating a query from $ d $ would yield $ D \setminus \{d\} $. Thus, we can rotate the proxy source document and attempt to check if this is true. We will then have many more experiment to run, from which to analyse results.
@@ -781,32 +794,63 @@ With the proposed approach detailed in the previous section we can describe some
 % Need to somehow effectively describe what a feature is....
 \subsection{Query Component Extraction}
 In order to formulate our complex queries as described in Section~\ref{proposedapproach.complexquery}, we must create a system which can read in a source document and return a collection of the complex query components. 
-In order to extract the Named Entities we can continue to use StanfordNLP in a similar way to how it was used in the previous project, with some slight adjustments. 
-We wish to extract n-gram named entities instead of tagging single constituent words. 
-This will just require a slight tweaking of the StanfordNLP configuration. 
-Next we will use Heideltime to extract the temporal entities from documents. 
-This however means we must propose a system which can decipher document origin dates as they exist in their doc id tags. 
-For the purposes of matching during indexing the target collection must be analysed by the same methods and have the same formatted temporal tags added to the inverted index. 
-The initial proposed method also requires extraction of other noun phrase chunks in order to add terms which provide context to the query in addition to the named and temporal entities. 
-As suggested this can also be performed using the StanfordNLP toolkit, either through the CoreNLP pipeline or the standalone Stanford parser. 
-These both allow Parts-Of-Speech (POS) tagging, which in turn allows extraction of noun phrases, which will form our chunks.
+In order to extract the Named Entities we can continue to use StanfordNLP in a similar way to the L4 Project, with some slight adjustments.
+This has been prototyped and we have successfully extracted n-gram named entities in order to retain multi word relationships.
+
+We propose to use Heideltime for the extraction of temporal entities.
+This works well with no major alterations and the times can be extracted programatically.
+A particular challenge while indexing the target collection may be the identification of document creation times.
+Confusingly, these exist as part of the Doc Id of each document and so some parser will need to be implemented to extract the dates from here.
+This should be relatively simple.
+It remains only to convert the Heideltime output into our desired format for storing temporal information.
+Initially, at least, we wish to store temporal entities as a string so they can be directly compared to times mentioned in target documents during retieval.
+Milliseconds since the epoch could be used for this, but this seems to be too granular for our needs.
+Instead we propose simply to use YYYYMMDD format.
+
+We also wish to extact other chunks from text in order to form queries.
+This could be noun phrases or verb phrases or other constructions.
+In order to do this we can again use the Stanford NLP toolkit.
+It includes the Stanford Parser which annotates senstences with parts of speech tags.
+We can identify different constructions using these parts of speech tags.
+
+Each of these extraction steps will have to be implemented in a way which not only interacts well with indexing but can also be used in a standalone sense to create queries from documents.
+
 
 \subsection{Complex Queries}
-With these query components created we can now explicitly form or complex query, using the IndriQL features provided by Terrier v5. 
-This may require some expansion depending on what query combinators are available. We may have to make new custom sizes of unordered windows. 
-This query will not be a textual query, in that it will not be provided to Terrier as merely text, but rather programmatically. 
+With these query components created we can now explicitly form our complex query, using the IndriQL features provided by Terrier v5. 
+The inclusion of IndriQL features in Terrier is very new and there is little example code or documentation.
+This will therefore require much experientation and investigation.
+It may be required to implement some custom extensions to the IndriQL in Terrier in order to acheive the extact custom query formulation we wish to create.
+For example, we may have to make new custom sizes of unordered windows. 
+This query will not be provided to Terrier as merely text, but rather programmatically. 
 Initially these queries will take a simple form of the various query components discussed above. 
-However more query formulations can be created in due course. 
+However more query formulations can be created in due course.
+
+Some combination of the extractors discussed above will be used in a class which receives a full document and outputs a complex query formulation.
+This complex query will be modelled by a class in Java.
+
 % This means we can match exactly bigram named entities as well as matching temporal expressions as unigrams. We can also match the other chunks. We can give each of these parts of the query a label. We should do this in several different configurations to ensure we are not missing any important query formulations.
 
 \subsection{Learning to Rank}
-With the query formulations generated we must run these through the learning to rank system in Terrier in order to produce the appropriate weighting to give each part of the complex query, as well as to any other features we may use. 
-Learning to rank will performed with the JForests implementation of LambdaMART as discussed in Section~\cite{NEEDED}. 
-The sampling step for learning to rank will initially use a naive measure such as BM25 to gather results \todo{what query do we use here.} 
-Subsequently, the existing relevance judgements in the test collection can be used to train the model. 
-Following some evaluation at this stage to ensure we are on the correct track, all query formulations can be provided to the learning framework. 
-As discussed in \cite{NEEDED}, the sampling step can be improved by using a more complex retrieval framework at this stage. 
-This should be done for all query configurations in order to have sufficient data for comparisons.
+With the creation of complex queries we will presumably have some sort of working retrieval system which can be evaluated in order to obtain baseline results.
+In order to improve the performance and to obtain data relating to the performance of individual query sections we now wish to apply learning to rank.
+Terrier provides learning to rank <> as standard.
+We will be using the JForests implementation of LambdaMART.
+Depending on the implementation of the above steps, we will produce a set of features, both query dependent and independent.
+These features will be applied in learning to rank in different combinations.
+The evalaution process must continue throughout this experimentation with feature combinations in order to discover the best configuration.
+Specifically our set of features must include features which directly correlate to the use of section of a query, so that we may measure it's effectiveness and apply a ``weight'' to it.
+We will not manually apply weights, instead the L2R process will achieve this for us.
+
+Learning to rank relies on a sampling step, both during learning and application of the learned model.
+Generally, a naive measure such as BM25 is used at this stage to achieve high recall.
+The reranking step then uses the complex query with the defined features to reorder the results.
+This initial sampling step will also require some investigation.
+Although we may use a more basic retrieval model, a query is still required.
+This may just be all the terms in the document with stopwords removed, although this will be slow.
+
+The existing relevance judgements in the test collection can be used to train the model. 
+
 
 % \subsection{Formulate Test Collection}
 % We can use the process described in Section~\ref{existingrelevance} to generate our source collection from which to generate queries. Ideally this source collection would be fairly large in order to produce a good amount of data for evaluation.
